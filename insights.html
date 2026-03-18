@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="https://i.postimg.cc/26WVTxdf/image-2026-03-16-130449481-removebg-preview.png">
+    <title>Insights</title>
+    <style>
+        /* --- CORE BACKGROUND & SETUP --- */
+        body {
+            background-image: linear-gradient(to top, rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url("https://i.postimg.cc/pV4B46ft/rojobg.jpg"); 
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            overflow-x: hidden; 
+        }
+
+        /* --- FONTS --- */
+        .p1 { font-family: "Papyrus", Papyrus, fantasy; }
+        .p3 { font-family: "Garamond", Garamond, serif; }
+        .p6 { font-family: "Times New Roman", Times, serif; }
+
+        /* --- BACK BUTTON --- */
+        .back {
+            background-color: transparent;
+            color: black;
+            font-weight: bold;
+            border-radius: 20px;
+            transition: background-color 0.3s, color 0.3s;
+            padding: 10px 10px;
+            position: absolute; 
+            top: 8.5px;
+            left: 10px;
+            z-index: 999;
+            cursor: pointer;
+            font-size: 15px; 
+            text-decoration: none;
+        }
+        
+        .back:hover { 
+            background-color: #765341F1;
+            color: white; 
+        }
+
+        /* --- HEADER --- */
+        .timeline-title {
+            font-size: 50px;
+            color: #4c3228;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        /* --- TIMELINE CONTAINER --- */
+        .timeline-wrapper {
+            position: relative;
+            max-width: 1400px; /* Increased to allow it to get much wider */
+            width: 92%; /* Forces it near the edges of the screen */
+            padding-left: 50px; /* Space for the timeline line */
+            margin-bottom: 50px;
+        }
+
+        /* The vertical brown line */
+        .timeline-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 15px;
+            width: 8px;
+            background-color: #765341;
+            border-radius: 10px;
+        }
+
+        /* Individual Insight Item */
+        .timeline-item {
+            position: relative;
+            margin-bottom: 70px; 
+        }
+
+        /* The white circles on the line */
+        .timeline-point {
+            position: absolute;
+            top: 25px; /* Aligns with the title in the brown box */
+            left: -43px; 
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: white;
+            border: 5px solid #765341;
+            z-index: 3;
+        }
+
+        /* --- BOX STYLING --- */
+        /* Outer brown box */
+        .card-outer {
+            background-color: #bca89f;
+            box-shadow: 15px 15px 5px #3d251eA0;
+            padding: 20px 20px 20px 20px; /* Space between brown edge, title, and inner box */
+            border-radius: 4px;
+        }
+
+        /* Inner white box with the dashed border */
+        .card-inner {
+            background-color: white;
+            border: 3.5px dashed #765341;
+            padding: 40px;
+        }
+
+        /* Text Styling inside boxes */
+        .box-title {
+            font-size: 32px;
+            color: #4c3228;
+            margin-top: 0;
+            margin-bottom: 15px; /* Space between title and the white box */
+            margin-left: 5px; /* Slight indent so it aligns nicely with the white box */
+        }
+        
+        .box-text {
+            font-size: 22px;
+            line-height: 1.6;
+            color: #000;
+            margin: 0;
+            text-align: justify;
+        }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            .timeline-title {
+                font-size: 35px;
+            }
+            .timeline-wrapper {
+                padding-left: 30px;
+                width: 95%; /* Hugs the edges even tighter on mobile */
+            }
+            .timeline-line {
+                left: 5px;
+                width: 6px;
+            }
+            .timeline-point {
+                left: -28px;
+                width: 12px;
+                height: 12px;
+                top: 20px;
+            }
+            .card-outer {
+                box-shadow: 8px 8px 5px #3d251eA0; 
+                padding: 15px;
+            }
+            .card-inner {
+                padding: 20px;
+            }
+            .box-title {
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+            .box-text {
+                font-size: 18px; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="Homepage.html" class="back p1">BACK</a>
+
+    <h1 class="p1 timeline-title">INSIGHTS</h1>
+
+    <div class="timeline-wrapper">
+        <div class="timeline-line"></div>
+
+        <div class="timeline-item">
+            <div class="timeline-point"></div>
+            <div class="card-outer">
+                <h2 class="p6 box-title">RESEARCHING FINDINGS</h2>
+                <div class="card-inner">
+                    <p class="p3 box-text">
+                        Working on SMUART taught us the importance of conducting thorough background research and developing a deep understanding of real-world archaeological challenges before attempting to create a solution. Through this process, we learned how to review existing excavation techniques, study artifact-handling methods, and identify gaps or limitations in current approaches. This helped us understand the specific difficulties that archaeologists face, such as carefully handling fragile artifacts, sorting large numbers of items efficiently, and working in unsafe or unstable dig sites.
+                    </p>
+                    <br>
+                    <p class="p3 box-text">
+                        In order to better replicate meticulous excavation and artifact management, we were able to apply study findings directly to our design by concentrating on these real-world archaeological difficulties. This allowed us to make well-informed decisions regarding the robot's mechanics, sensor integration, and workflow. This technique made it easier for us to relate theory to reality and made it clear how crucial evidence-based innovation is to the preservation of historical assets. In the end, thorough investigation made sure that SMUART is consistent with the FLL Unearthed theme and is both technically possible and pertinent to the difficulties of discovering and safeguarding what is buried underneath.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-point"></div>
+            <div class="card-outer">
+                <h2 class="p6 box-title">PROBLEM-SOLVING SKILLS</h2>
+                <div class="card-inner">
+                    <p class="p3 box-text">
+                        Through multiple iterations and hands-on testing, our team encountered a variety of technical and design challenges, including stabilizing the robot, securing the conveyor system, and safely handling simulated fragile artifacts. Each challenge required careful observation, critical analysis, and thoughtful experimentation to identify the root causes and determine effective solutions. By approaching problems systematically, we learned to break down complex issues into smaller, manageable tasks and test possible solutions in a controlled and organized manner.
+                    </p>
+                    <br>
+                    <p class="p3 box-text">
+                        With each iteration, we were able to improve the robot's programming logic and mechanical design, guaranteeing more accurate excavation, artifact detection, and sorting performance. By experimenting with different strategies after the first ones failed, including altering the robot's structure or moving the sensors, we also improved our ability to think creatively. We gained perseverance, patience, and resilience by overcoming these obstacles, which reaffirmed the need of learning from errors. In the end, our problem-solving skills improved our capacity to effectively address technological challenges and raise the SMUART system's overall dependability and performance.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

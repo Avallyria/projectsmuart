@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="icon" type="image/png" href="https://i.postimg.cc/26WVTxdf/image-2026-03-16-130449481-removebg-preview.png">
+    <title>Review of Related Literature</title>
+<style>
+
+    :root {
+        --book-width: 50vw;
+        --book-height: 100vh;
+        --speed: 0.9s;
+    }
+
+    /* FIX: html and body strictly locked to prevent horizontal zoom/wobble on mobile */
+    html, body {
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+
+    body {
+        background-image: linear-gradient(to top, rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url("https://i.postimg.cc/pdL5V88b/library.jpg"); 
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    /* The Container */
+    .book-container {
+        width: var(--book-width);
+        height: var(--book-height);
+        perspective: 1500px; 
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .book {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        left: 50vw; 
+    }
+
+    /* Individual Page Styling */
+    .page {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform-style: preserve-3d;
+        transform-origin: left;
+        transition: transform var(--speed) cubic-bezier(0.645, 0.045, 0.355, 1);
+     }
+
+    /* Front and Back of each leaf */
+    .front, .back, .front1, .back1 {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden; 
+        display: flex;
+        flex-direction: column;
+        padding: 5vh 3vw; 
+        box-sizing: border-box;
+        box-shadow: inset 3px 0px 20px rgba(0,0,0,0.1);    
+        overflow-y: auto; 
+        overflow-x: hidden;
+    }
+
+    /* Hide ugly scrollbars on the pages but keep functionality */
+    .front::-webkit-scrollbar, .back::-webkit-scrollbar, .front1::-webkit-scrollbar, .back1::-webkit-scrollbar {
+        width: 0px;
+        background: transparent; 
+    }
+
+    .front, .back {
+        background-image: url(https://i.postimg.cc/x1rXBMZN/pagecov.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    
+    .front { border-left: 2px solid #765341; }
+
+    .front1, .back1 { background: white; }
+    
+    .back {
+        transform: rotateY(180deg);
+        background-color: #fafafa;
+        
+    }
+    
+    .back1 {
+        transform: rotateY(180deg);
+        background-color: #fafafa;
+    }
+
+    /* Visuals for the Cover */
+    .cover-front {
+        background-image: url(https://i.postimg.cc/k5w1J6Yg/rrlbg.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    
+    .shape {
+        position: absolute;
+        top: 55%;  
+        left: 0px;  
+        width: 100%;
+        height: 45%;
+        background-color: #8b6c5c; 
+        z-index: 0;
+        pointer-events: none; 
+        border-top: 10px solid #765341; 
+    }
+
+    /* The Animation State */
+    .flipped { transform: rotateY(-180deg); }
+
+    /* Z-Index Management */
+    #p1 { z-index: 4; }
+    #p2 { z-index: 3; }
+    #p3 { z-index: 2; }
+    #p4 { z-index: 1; }
+
+    .flipped#p1 { z-index: 1; }
+    .flipped#p2 { z-index: 2; }
+    .flipped#p3 { z-index: 3; }
+    .flipped#p4 { z-index: 4; }
+    
+    @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; visibility: hidden; } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; visibility: visible; } }
+
+    /* Navigation Arrow Buttons Style */
+    .nav-arrows {
+        position: fixed;
+        bottom: 2vh;
+        left: 3vw;
+        width: 94vw; 
+        display: flex;
+        justify-content: space-between;
+        z-index: 1000;
+        pointer-events: none;
+    }
+
+    .arrow-btn {
+        color: black;
+        font-size: 3vh;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        pointer-events: auto;
+    }
+
+    .arrow-btn:hover { transform: scale(1.2); }
+    
+    .back-btn {
+        background-color: transparent; 
+        transition: all 0.3s;
+        border-radius: 20px;
+        padding: 10px 10px;
+        position: absolute; 
+        top: 8.5px;
+        left: 10px;
+        z-index: 999;
+        cursor: pointer;
+        font-size: 2.05vh;
+        border: none;
+        text-decoration: none;
+    }
+
+    .fade-out-active { animation: fadeOut 0.5s ease forwards; }
+    .fade-in-active { animation: fadeIn 0.5s ease forwards; }
+    
+    .back-btn:hover { background-color: #765341F1; color: white; }
+
+    .p1 { font-family: "Papyrus", Papyrus, fantasy; }
+    .p2 { font-family: "Copperplate", Copperplate, fantasy; }
+    .p3 { font-family: "Garamond", Garamond, serif; }
+    .p6 { font-family: "Times New Roman", Times, serif; }
+    
+    /* FIX: Centered neatly on the left side */
+    .intro-text {
+        position: absolute;
+        font-size: 3.5vh;
+        top: 52%;
+        transform: translateY(-50%);
+        left: 5vw;
+        width: 40vw;
+        text-align: center;
+        text-shadow: 0px 0px 10px brown;
+        z-index: 0;
+        color: black;
+        line-height: 1.5;
+    }
+    
+    /* FIX: Centered neatly on the right side, hidden by default */
+    .outro-text {
+        position: absolute;
+        font-size: 3.5vh;
+        top: 52%;
+        transform: translateY(-50%);
+        right: 5vw;
+        width: 40vw;
+        text-align: center;
+        text-shadow: 0px 0px 10px brown;
+        z-index: 0;
+        line-height: 1.5;
+        opacity: 0; /* Hidden until the last page flips */
+        pointer-events: none;
+        transition: opacity 0.8s ease; 
+    }
+    
+    /* FIX: Lowered Title to fit perfectly inside the dark brown shape */
+    .book-title {
+        position: absolute;
+        font-size: 11vh;
+        top: 60%; 
+        width: 100%;
+        left: 0;
+        text-align: center;
+        z-index: 1;
+        letter-spacing: 2px;
+        text-shadow: 3px 3px 4px white;
+        color: #3D251E;
+        margin: 0;
+    }
+    
+    .book-authors {
+        position: absolute;
+        font-size: 3.2vh;
+        bottom: 2%;
+        width: 100%;
+        left: 0;
+        text-align: center;
+        z-index: 1;
+        text-shadow: 1px 1px 4px white;
+        color: #3D251E;
+    }
+    
+    .chapter-titles {
+        letter-spacing: 2px; 
+        font-size: 4.5vh; 
+        text-align: center;
+        margin-top: 2vh;
+        margin-bottom: 3vh;
+    }
+    
+    .chapter-texts {
+        letter-spacing: 1px;
+        line-height: 1.5;
+        font-size: 2.7vh; 
+        text-align: justify;
+        margin: 0;
+    }
+    
+    /* FIX: Restricts image sizes on desktop so they don't get too large */
+    .chapter-pics {
+        max-height: 35vh; 
+        max-width: 100%; 
+        box-shadow: 7px 7px 7px white;
+        object-fit: cover;
+    }
+
+    /* --- MOBILE SINGLE PAGE VIEW STYLES --- */
+    @media (max-width: 768px) {
+        body {
+            height: auto;
+            min-height: 100vh;
+            overflow-y: auto; 
+            overflow-x: hidden; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 8vh 0 5vh 0; 
+            gap: 4vh; 
+        }
+
+        .intro-text, .outro-text {
+            position: relative; 
+            display: block;
+            width: 85vw;
+			font-size: 2.2vh;
+            top: auto; left: auto; right: auto; bottom: auto; 
+            transform: none; /* Disables desktop centering transform */
+            margin: 0; 
+            opacity: 1; /* Make sure it's always visible on mobile */
+        }
+
+        /* FIX: Added heavy margin-top to push outro down away from the buttons */
+        .outro-text {
+            margin-top: 9vh;
+            margin-bottom: 5vh; 
+        }
+
+        .book-container {
+            position: relative; 
+            width: 90vw;
+            height: 70vh; 
+            margin: 0; 
+            left: auto;
+            top: auto;
+        }
+
+        .book {
+            left: 0; 
+            transition: transform var(--speed) cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .nav-arrows {
+            position: absolute; 
+            bottom: -8vh; 
+            left: 0;
+            width: 100%; 
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .arrow-btn {
+            background: rgba(118, 83, 65, 0.85);
+            color: white;
+            padding: 1.5vh 5vw;
+            border-radius: 1vh;
+            font-size: 2.5vh;
+        }
+
+        /* STRICT MOBILE RESIZING: Forces content to fit within the single page view */
+        .front, .back, .front1, .back1 {
+            padding: 3vh 4vw !important; /* Slightly less padding to save room */
+        }
+
+        .chapter-pics {
+            width: 100% !important;
+            float: none !important;
+            margin: 0 0 1.5vh 0 !important;
+            max-height: 22vh !important; /* Stricter height limit for mobile images */
+        }
+
+        .book-title { font-size: 4.3vh; top: 61%; }
+        .book-authors { font-size: 1.8vh; bottom: 4%; }
+        
+        .chapter-titles { 
+            font-size: 2.8vh !important; /* Smaller titles */
+            margin-top: 0vh !important; 
+            margin-bottom: 1.5vh !important; 
+        }
+        
+        .chapter-texts { 
+            font-size: 1.6vh !important; /* Smaller text */
+            line-height: 1.3 !important; 
+        }
+		
+    }
+
+</style>
+</head>
+<body>
+
+<a href="Homepage.html" class="back-btn p1" style="color: black;"><b>BACK</b></a>
+
+<b class="intro-text p1">
+    Exploring what lies beneath the ground is essential for understanding human history and preserving cultural heritage. Archaeology allows researchers to study past civilizations, environments, and technological developments through artifacts buried underground. Protecting these discoveries ensures that future generations can continue to learn from history.
+</b>
+
+<div class="book-container">
+    <div class="book" id="book">
+        
+        <div class="page" id="p1">
+            <div class="front1 cover-front" style="border-left: 10px solid #765341;">
+                <div class="shape"></div>
+                <p class="book-title p2">REVIEW OF <br><i>RELATED LITERATURE</i></p>
+                <b class="book-authors p6">Rodolfo Jose C. Evediente | Sean Matthew H. Mailig</b>
+            </div>
+            <div class="back">
+                <h2 class="p1 chapter-titles"><b>Archaeology and Cultural Heritage</b></h2>
+                <div>
+                    <img src="https://i.postimg.cc/MZdqN2c7/chap1.jpg" class="chapter-pics" style="float: right; width: 40%; border-radius: 4vh; margin-left: 2vw; margin-bottom: 2vh;">
+                    <p class="p3 chapter-texts">
+                        Archaeology plays a vital role in understanding human history through the study of material remains and cultural landscapes. According to <a href="https://doi.org/10.4324/9780203602263" style="color: #000080">Smith (2006)</a> heritage is not only about preserving physical artifacts but also about maintaining cultural identity and shared meaning within communities. Similarly, <a href="https://publ.icomos.org/publicomos/jlbSai?html=Pag&page=Pml/Not&base=technica&ref=4041DE9B9C61269F0B55CA3AAFB9BD13" style="color: #000080">ICOMOS (2017)</a> emphasizes the importance of conserving heritage sites to ensure their protection for future generations. The <a href="https://whc.unesco.org/en/conventiontext/" style="color: #000080">UNESCO (1972)</a> Convention further reinforces that cultural and natural heritage sites are irreplaceable and must be safeguarded through responsible management and innovation. These perspectives highlight the importance of balancing exploration with preservation, which directly aligns with the goals of the UNEARTHED theme.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="page" id="p2">
+            <div class="front">
+                <h2 class="p1 chapter-titles"><b>Technology in Archaeological Exploration</b></h2>
+                <div>
+                    <p class="p3 chapter-texts" style="margin-bottom: 3vh;">
+                        Modern archaeological research increasingly relies on advanced technologies to improve accuracy and reduce damage to sites. <a href="https://doi.org/10.1201/9780203889558" style="color: #000080">Campana and Piro (2009)</a> describe how geophysical methods allow researchers to detect buried features without invasive excavation. Similarly, <a href="https://doi.org/10.1016/j.jas.2012.02.002" style="color: #000080">Lasaponara and Masini (2012)</a> discuss the use of satellite remote sensing in identifying archaeological structures and monitoring changes in landscapes. These non-invasive technologies help researchers “see beneath the surface” while minimizing harm to valuable sites. Such innovations support the idea that exploration can be conducted responsibly, reflecting the problem-solving approach encouraged in FIRST LEGO League.
+                    </p>
+                    <img src="https://i.postimg.cc/CxDyFW1h/chap2.jpg" class="chapter-pics" style="width: 100%; height: 30%; border-radius: 4vh;">
+                </div>
+            </div>
+            <div class="back">
+                <h2 class="p1 chapter-titles"><b>Mapping and Precision in Exploring Untouched Grounds</b></h2>
+                <div>
+                    <img src="https://i.postimg.cc/pTvThvb2/chap3.jpg" class="chapter-pics" style="float: left; width: 45%; border-radius: 5vh; margin-right: 2vw; margin-bottom: 2vh;">
+                    <p class="p3 chapter-texts">
+                        Mapping and precision are essential in exploring undiscovered regions because they enable accurate representation of landscapes and spatial relationships. <a href="https://doi.org/10.1007/978-3-319-72478-2_33" style="color: #000080">Goodchild (2018)</a> states that advances in geographic information science improve spatial data collection and analysis, enhancing the interpretation of complex terrains. Similarly, <a href="https://doi.org/10.1016/j.infgeo.2025.100013" style="color: #000080">Longley (2019)</a> emphasizes that modern mapping technologies such as Geographic Information Systems provide detailed and reliable representations of environmental features. These tools allow researchers to document and analyze remote areas with greater accuracy and efficiency. Such advancements support the idea that exploration can be conducted with accuracy and responsibility, reflecting the innovative problem-solving approach encouraged in FIRST LEGO League.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="page" id="p3">
+            <div class="front">
+                <h2 class="p1 chapter-titles">Documentation and Preservation of Findings</h2>
+                <div>
+                    <img src="https://i.postimg.cc/0yj31XQ7/chap4.jpg" class="chapter-pics" style="float: left; width: 40%; border-radius: 5vh; margin-right: 2vw; margin-bottom: 2vh;">
+                    <p class="p3 chapter-texts">
+                        Preserving and documenting findings play a crucial role in studying unexplored environments as they ensure that discoveries and collected data remain accessible and verifiable over time. <a href="https://www.unesco.org/en/memory-world" style="color: #000080">UNESCO (2018)</a> emphasizes that proper archival systems and conservation practices are vital for safeguarding scientific records and information for future research and reference. Similarly, <a href="https://scholar.google.com/scholar?q=Taylor+Anderson+2019+data+preservation" style="color: #000080">Taylor and Anderson (2019)</a> explain that effective preservation strategies protect data and physical evidence from deterioration or loss, supporting long-term scientific analysis. These practices demonstrate that systematic documentation and preservation reinforce transparency and sustainability in exploration, aligning with the core principles promoted by the FIRST LEGO League.
+                    </p>
+                </div>
+            </div>
+            <div class="back">
+                <h2 class="p1 chapter-titles">Digital Innovation and Robotics in Exploration</h2>
+                <div>
+                    <img src="https://i.postimg.cc/d1HSL8LY/chap5.jpg" class="chapter-pics" style="float: right; width: 45%; border-radius: 2vh; margin-left: 2vw; margin-bottom: 2vh;">
+                    <p class="p3 chapter-texts">
+                        Technological advancement extends beyond remote sensing to robotics and autonomous systems. <a href="https://mitpress.mit.edu/9780262321310/disaster-robotics/" style="color: #000080">Murphy (2014)</a> highlights how robotics can operate in dangerous or hard-to-reach environments, reducing risks to humans. <a href="https://books.google.com.ph/..." style="color: #000080">Siegwart, Nourbakhsh, & Scaramuzza (2011)</a> explain that autonomous mobile robots are capable of navigating complex terrains and collecting data efficiently. In addition, <a href="https://doi.org/10.3390/su16167125" style="color: #000080">Kalay, Kvan, & Affleck (2008)</a> discuss how digital media and emerging technologies contribute to documenting and preserving cultural heritage. Recent research by <a href="https://doi.org/10.3390/su16167125" style="color: #000080">Lian and Xie (2024)</a> identifies digital cultural heritage as a rapidly growing field, emphasizing innovation and interdisciplinary collaboration. These studies demonstrate that robotics and digital systems can enhance exploration while supporting preservation efforts, reflecting the spirit of FIRST LEGO League’s innovation challenge.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="page" id="p4">
+            <div class="front">
+                <h2 class="p1 chapter-titles">Public Awareness and Education</h2>
+                <div>
+                    <img src="https://i.postimg.cc/vHk7D0hx/chap6.jpg" class="chapter-pics" style="width: 100%; border-radius: 2vh; margin-bottom: 3vh;">
+                    <p class="p3 chapter-texts">
+                        Public education also plays an essential role in heritage protection. The <a href="https://doi.org/10.3390/su16167125" style="color: #000080">National Geographic Society (n.d.)</a> explains that archaeology helps people understand past civilizations and promotes awareness of cultural preservation. By engaging communities and young learners, heritage protection becomes a shared responsibility. This supports the educational mission of FIRST LEGO League, where students apply research, technology, and teamwork to create meaningful solutions.
+                    </p>
+                </div>
+            </div>
+            <div class="back1 cover-front" style="border-right: 10px solid #765341;">
+            </div>
+        </div>
+    </div>
+    
+    <div class="nav-arrows">
+        <b class="arrow-btn" onclick="flipPrev()">❮</b>
+        <b class="arrow-btn" onclick="flipNext()">❯</b>
+    </div>
+</div>
+
+<b class="outro-text p1">
+    The reviewed literature consistently demonstrates that archaeology is essential in preserving cultural identity and understanding human history. Advances in geophysics, satellite imaging, robotics, and digital technologies have significantly improved exploration methods while reducing damage to archaeological sites. However, many studies focus on professional applications, with limited emphasis on youth-driven innovation. This gap highlights the relevance of FIRST LEGO League’s UNEARTHED challenge, which encourages students to develop creative, technology-based solutions that promote both discovery and preservation.
+</b>
+
+<script>
+    let mobileViewSide = 'right'; 
+
+    function updateMobileView() {
+        const book = document.getElementById('book');
+        if (window.innerWidth <= 768) {
+            if (mobileViewSide === 'left') {
+                book.style.transform = 'translateX(100%)';
+            } else {
+                book.style.transform = 'translateX(0)';
+            }
+        } else {
+            book.style.transform = 'none'; 
+        }
+    }
+
+    window.addEventListener('resize', updateMobileView);
+
+    function flip(id) {
+        const page = document.getElementById(id);
+        page.classList.toggle('flipped');
+
+        // Manage Back Button visibility
+        if (id === 'p1') {
+            const backBtn = document.querySelector('.back-btn');
+            if (page.classList.contains('flipped')) {
+                backBtn.classList.add('fade-out-active');
+                backBtn.classList.remove('fade-in-active');
+            } else {
+                setTimeout(() => {
+                backBtn.classList.add('fade-in-active');
+                backBtn.classList.remove('fade-out-active');
+                }, 500);
+            }
+        }       
+
+        // FIX: Desktop Outro text timing
+        if (id === 'p4') {
+            const isMobile = window.innerWidth <= 768;
+			
+            const outro = document.querySelector('.outro-text');
+            if (!isMobile) {
+                if (page.classList.contains('flipped')) {
+                    outro.style.transitionDelay = '0.4s'; // Wait for page to flip before fading in
+                    outro.style.opacity = '1';
+                    outro.style.pointerEvents = 'auto'; 
+                } else {
+                    outro.style.transitionDelay = '0s'; // Fade out immediately if flipped back
+                    outro.style.opacity = '0';
+                    outro.style.pointerEvents = 'none'; 
+                }
+            }
+        }
+		
+    }
+    
+    function flipNext() {
+        const isMobile = window.innerWidth <= 768;
+        
+        if (isMobile) {
+            if (mobileViewSide === 'right') {
+                const nextToFlip = document.querySelector('.page:not(.flipped)');
+                if (nextToFlip) {
+                    flip(nextToFlip.id);
+                    mobileViewSide = 'left';
+                    updateMobileView(); 
+                }
+            } else {
+                const nextToFlip = document.querySelector('.page:not(.flipped)');
+                if (nextToFlip) {
+                    mobileViewSide = 'right';
+                    updateMobileView(); 
+                }
+            }
+        } else {
+            const nextToFlip = document.querySelector('.page:not(.flipped)');
+            if (nextToFlip) {
+                flip(nextToFlip.id);
+            }
+        }
+    }
+
+    function flipPrev() {
+        const isMobile = window.innerWidth <= 768;
+
+        if (isMobile) {
+            if (mobileViewSide === 'left') {
+                const flippedPages = document.querySelectorAll('.page.flipped');
+                if (flippedPages.length > 0) {
+                    const lastFlipped = flippedPages[flippedPages.length - 1];
+                    flip(lastFlipped.id);
+                    mobileViewSide = 'right';
+                    updateMobileView(); 
+                }
+            } else {
+                const flippedPages = document.querySelectorAll('.page.flipped');
+                if (flippedPages.length > 0) {
+                    mobileViewSide = 'left';
+                    updateMobileView(); 
+                }
+            }
+        } else {
+            const flippedPages = document.querySelectorAll('.page.flipped');
+            if (flippedPages.length > 0) {
+                const lastFlipped = flippedPages[flippedPages.length - 1];
+                flip(lastFlipped.id);
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

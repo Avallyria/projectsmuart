@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="https://i.postimg.cc/26WVTxdf/image-2026-03-16-130449481-removebg-preview.png">
+    <title>Introduction</title>
+<style>
+/* --- BASE STYLES --- */
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden; 
+}
+
+.p1 { font-family: "Papyrus", fantasy; }
+.p2 { font-family: "Copperplate", fantasy; }
+.p3 { font-family: "Garamond", serif; }
+.p4 { font-family: "Verdana", sans-serif; }
+
+/* --- BACK BUTTON --- */
+.back {
+    background-color: transparent;
+    color: black;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+    padding: 10px 10px;
+    position: absolute;
+    top: 8.5px;
+    left: 10px;
+    z-index: 999;
+    cursor: pointer;
+    font-size: 15px; 
+}
+.back:hover { 
+    background-color: #A08679; 
+}
+
+/* --- MAIN LAYOUT --- */
+.main-layout {
+    display: flex;
+    min-height: 100vh; 
+    width: 100%; 
+}
+
+/* --- LEFT SIDE --- */
+.left-section {
+    position: relative; 
+    flex: 0 0 40%; 
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.intro-bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.intro-bg-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+}
+
+.decol {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    margin: clamp(5px, 2vh, 15px) 0; 
+}
+
+.intro-title {
+    font-size: clamp(30px, 6vw, 95px); 
+    color: #6A4A3A;
+    letter-spacing: 2px;
+    text-shadow: 3px 2px 2px white;
+    margin: 0;
+    line-height: 1.1;
+}
+
+.intro-question {
+    font-size: clamp(16px, 2.5vh, 22px); 
+    color: white;
+    letter-spacing: 2px;
+    line-height: 1.5;
+    text-shadow: 3px 2px 2px black;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* --- RIGHT SIDE --- */
+.right-section {
+    flex: 0 0 60.3%;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: repeat(2, 1fr); 
+    gap: clamp(10px, 2vh, 25px); 
+    padding: clamp(15px, 3vh, 30px) clamp(22px, 3vw, 0px); 
+    background-color: white;
+}
+
+/* --- THE BOXES --- */
+.info-card {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: clamp(5px, 1vh, 10px) clamp(15px, 2vw, 30px) clamp(15px, 2.5vh, 25px); 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px; 
+}
+
+.card-bg-main {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: #A08679;
+    z-index: -2;
+}
+
+/* Updated container to stretch uniformly */
+.card-paragraph-container {
+    background-color: #BCA89F; 
+    padding: clamp(10px, 1.5vh, 15px) clamp(15px, 2vw, 30px); 
+    width: 100%; 
+    border-radius: 10px; 
+    flex-grow: 1; /* This forces the box to stretch to the bottom equally */
+    display: flex;
+    align-items: center; /* Centers the text vertically inside the uniform box */
+}
+
+.card-title {
+    font-size: clamp(24px, 4vh, 40px); 
+    color: #3D251E;
+	position: relative;
+    top: 10px;
+}
+
+.card-subtitle {
+    font-size: clamp(18px, 3vh, 32px); 
+    color: #3D251E;
+    margin: 0; 
+}
+
+.card-text {
+    font-size: clamp(14px, 2vh, 21px); 
+    color: #3D251E;
+    line-height: 1.45;
+    margin: 0;
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 1024px) {
+    html, body { height: auto; overflow: visible; }
+    .main-layout { flex-direction: column; height: auto; }
+    .left-section { width: 100%; padding: 80px 20px; height: 50vh; }
+    .right-section { width: 100%; grid-template-columns: 1fr; grid-template-rows: auto; padding: 40px 20px; }
+    .info-card { min-height: 400px; }
+}
+</style>
+</head>
+<body>
+
+<b class ="p1">
+    <a href="Homepage.html" class="back" style="font-size: 15px; color: black;">BACK</a>
+</b>
+
+<div class="main-layout">
+
+    <div class="left-section">
+        <div class="intro-bg-container">
+            <img src="https://i.postimg.cc/ZYCcfSyv/intropic3.jpg" alt="Background">
+        </div>
+
+        <img src="https://i.postimg.cc/LhF4FDsx/decoline2up.png" class="decol" alt="Decorative Line Up">
+        
+        <b class="p2 intro-title">INTRODUCTION</b>
+        <b class="p4 intro-question">
+            How can we explore what’s buried <br> underground while protecting history and <br> improving efficiency?
+        </b>
+        
+        <img src="https://i.postimg.cc/RqxCxd0R/decoline2down.png" class="decol" alt="Decorative Line Down">
+    </div>
+
+    <div class="right-section">
+
+        <div class="info-card">
+            <div class="card-bg-main"></div>
+            <b class="p1 card-title">EXPLORING</b>
+            <b class="p1 card-subtitle">what lies beneath</b>
+            <div class="card-paragraph-container">
+                <p class="p3 card-text">
+                    Exploring what lies beneath the ground is essential for understanding human history and preserving cultural heritage. <b>Archaeology</b> allows researchers to study past civilizations, environments, and technological developments through artifacts buried underground. Protecting these discoveries ensures that future generations can continue to learn from history.
+                </p>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="card-bg-main"></div>
+            <b class="p1 card-title">CHALLENGES</b>
+            <b class="p1 card-subtitle">in Archaeology</b>
+            <div class="card-paragraph-container">
+                <p class="p3 card-text">
+                    <b>Traditional archaeological excavation</b> relies heavily on manual labor, making the process slow, physically demanding, and unsafe. In large dig sites, artifacts may also be misidentified during sorting due to human error, fatigue, and harsh environmental conditions. In addition, documentation is often done manually, making long-term tracking and analysis more difficult.
+                </p>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="card-bg-main"></div>
+            <b class="p1 card-title">REAL-WORLD</b>
+            <b class="p1 card-subtitle">relevance</b>
+            <div class="card-paragraph-container">
+                <p class="p3 card-text">
+                    As excavation sites continue to expand, archaeologists face increasing challenges in uncovering artifacts accurately while protecting historical layers and ensuring proper preservation. These highlight the need for safer, more reliable, and more efficient excavation methods that can <b>improve accuracy</b>.
+                </p>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <div class="card-bg-main"></div>
+            <b class="p1 card-title">CONNECTION</b>
+            <b class="p1 card-subtitle">to FLL theme</b>
+            <div class="card-paragraph-container">
+                <p class="p3 card-text">
+                    This real-world problem directly connects to the <b>FLL Unearthed challenge</b>, which focuses on finding innovative ways to explore the underground while protecting history and improving how excavation is performed. The theme encourages teams to develop solutions through the use of technology and engineering.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

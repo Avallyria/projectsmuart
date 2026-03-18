@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<link rel="icon" type="image/png" href="https://i.postimg.cc/26WVTxdf/image-2026-03-16-130449481-removebg-preview.png">
+<title>Proposed Solutions</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+font-family:sans-serif;
+}
+
+body{
+background-color:#f4f4f4;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+header{
+background-color:#A08679;
+width:100%;
+padding:40px 20px;
+text-align:center;
+position:relative;
+}
+
+.header-title{
+color:white;
+font-size:clamp(3rem,8vw,70px);
+letter-spacing:10px;
+}
+
+.main{
+flex-grow:1;
+display:flex;
+flex-direction:column;
+align-items:center;
+padding:80px 20px;
+}
+
+/* CAROUSEL SECTION */
+
+.carousel{
+display:flex;
+gap:40px;
+flex-wrap:wrap;
+justify-content:center;
+max-width:1200px;
+}
+
+/* CLICKABLE CARD */
+
+.card{
+background:#6A4A3ACC;
+border-radius:20px;
+box-shadow:5px 5px #3D251E;
+padding:60px 30px;
+width:280px;
+text-align:center;
+transition:0.3s;
+color:white;
+cursor:pointer;
+}
+
+.card:hover{
+transform:translateY(-5px);
+}
+
+a{
+text-decoration:none;
+}
+
+/* PARAGRAPH SECTION */
+
+.solution-text{
+margin-top:60px;
+max-width:900px;
+background:#6A4A3ACC;
+padding:40px;
+border-radius:20px;
+box-shadow:5px 5px #3D251E;
+color:white;
+line-height:1.6;
+font-size:18px;
+}
+
+/* MOBILE */
+
+@media (max-width:900px){
+
+.carousel{
+flex-direction:column;
+align-items:center;
+}
+
+.card{
+width:90%;
+max-width:500px;
+}
+
+}
+
+.p1 { font-family: "Papyrus", Papyrus, fantasy; }
+.p2 { font-family: "Copperplate", Copperplate, fantasy; }
+.p3 { font-family: "Garamond", Garamond, serif; }
+.p4 { font-family: "Verdana", Verdana, cursive; }
+.p5 { font-family: "Brush Script MT", Brush, cursive; }
+.p6 { font-family: "Times New Roman", Times, serif; }
+.p7 { font-family: "Lucida Handwriting", Lucida, cursive; }
+
+.back {
+        background-color: transparent;
+        color: white;
+        font-weight: bold;
+        border-radius: 20px;
+        transition: background-color 0.3s;
+        padding: 10px 10px;
+        position: absolute;
+        top: 8.5px;
+        left: 10px;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 15px;
+        z-index: 10;
+    }
+
+    .back:hover { 
+        background-color: black; 
+    }
+	
+
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="Homepage.html" class="p1 back">BACK</a>
+<h1 class="p1 header-title">PROPOSED SOLUTION</h1>
+</header>
+
+<div class="main">
+
+<div class="carousel">
+
+<a href="How Our System Works.html">
+<div class="card">
+<h2>HOW OUR SYSTEM WORKS</h2>
+</div>
+</a>
+
+<a href="Robot Discussion.html">
+<div class="card">
+<h2>ROBOT DISCUSSION</h2>
+</div>
+</a>
+
+<a href="Design Process.html">
+<div class="card">
+<h2>DESIGN PROCESS</h2>
+</div>
+</a>
+
+</div>
+
+<div class="solution-text">
+
+<p>
+To address the limitations of traditional archaeological excavation methods, our team developed SMUART (Searching Manufactured Underground Artifacts with Refined Tools). SMUART is an integrated excavation support system that combines robotics and sensor technology to improve excavation accuracy, artifact protection, and documentation efficiency.
+</p>
+
+<br>
+
+<p>
+The system focuses on four main processes: robotic excavation, automated artifact sorting, organized artifact storage, and documentation. By combining these processes into one coordinated workflow, SMUART helps archaeologists perform excavation tasks faster, safer, and with greater consistency while reducing the risk of artifact damage and human error.
+</p>
+
+</div>
+
+</div>
+
+</body>
+</html>

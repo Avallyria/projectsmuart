@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+	<link rel="icon" type="image/png" href="https://i.postimg.cc/26WVTxdf/image-2026-03-16-130449481-removebg-preview.png">
+	<title>PROJECT: SMUART</title>
+<style>
+body {
+    /* Replaced absolute centering trick with Flexbox */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    overflow: hidden; /* Prevents scrollbars when scaling */
+    background-image: linear-gradient(to top, rgba(255,255,255,0.3), rgba(255,255,255,0.3)), url("https://i.postimg.cc/PqknGzY6/ebea9db9-2d9d-4f60-8cef-808bbe34e07a-(1).jpg"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+/* LOGO */
+.smuart{
+    height:135px;
+    position: absolute;
+    top: 70.5%;
+    left: 84%;
+    z-index: 2;
+}
+
+/* IMAGE BUTTONS */
+.hero-button {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;   /* ensures image stays inside circle */
+    position: relative;
+    cursor: pointer;
+	transition: transform 0.3s, filter 0.3s, background-color 0.3s;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.hero-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block; /* removes tiny gaps */
+    transition: transform 0.3s, filter 0.5s, background-color 0.3s;
+}
+
+/* Hide text initially */
+.button-text {
+    font-size: 70px;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.5s;
+
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-60%, -95%);
+}
+
+/* When hovering the button, show text */
+.hero-button:hover .button-text {
+    opacity: 1;
+}
+
+/* Optional: button hover effect */
+.hero-button:hover{
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    background-color: black;
+}
+
+.hero-button:hover img {
+    filter: brightness(0); /* makes image completely black */
+}
+
+.one {
+	position: absolute; 
+	top: 20%; 
+	left: 49%;
+}
+
+.two {
+	position: absolute; 
+	top: 4%; 
+	left: 6%;
+}
+
+.three {
+	position: absolute; 
+	top: 15%; 
+	left: 83%;
+}
+
+.four {
+	position: absolute; 
+	top: 40%; 
+	left: 17%;
+}
+
+.five {
+	position: absolute; 
+	top: 5%; 
+	left: 65%;
+}
+
+.six {
+	position: absolute; 
+	top: 10%; 
+	left: 30%;
+}
+
+.seven {
+	position: absolute; 
+	top: 50%; 
+	left: 37%;
+}
+
+.eight {
+	position: absolute; 
+	top: 50%; 
+	left: 60%;
+}
+
+footer{
+    background:#8b6c5c;
+	width: 98.7vw;
+    color:white;
+    text-align:center;
+    padding: 10px;
+	position: absolute;
+	bottom: 0%;
+}
+
+.foot-text {
+	font-size: 20px;
+}
+	
+
+.p1 { font-family: "Papyrus", Papyrus, fantasy; }
+.p2 { font-family: "Copperplate", Copperplate, fantasy; }
+.p3 { font-family: "Garamond", Garamond, serif; }
+.p4 { font-family: "Verdana", Verdana, cursive; }
+.p5 { font-family: "Brush Script MT", Brush, cursive; }
+.p6 { font-family: "Times New Roman", Times, serif; }
+.p7 { font-family: "Lucida Handwriting", Lucida, cursive; }
+
+@media (max-width: 768px) {
+    /* 1. ENABLE SWIPING/PANNING */
+    html, body {
+        overflow: hidden; !important;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        /* Scroll-padding-left ensures the browser snaps to the start */
+        scroll-padding-left: 0;
+    }
+
+    /* 2. SET THE CANVAS SIZE */
+    /* This forces the 'world' to be 150% wider than the phone screen 
+       so those 'left: 81%' buttons have a place to exist */
+    body {
+        min-width: 150vw; 
+        min-height: 125vh;
+        background-size: cover;
+        background-attachment: fixed; /* Keeps background still while you scroll buttons */
+		background-position: center;
+    }
+
+    /* 3. SCALE BUTTONS DOWN */
+    .hero-button {
+        width: 50px !important; 
+        height: 50px !important;
+		transform: translateZ(0);
+    }
+
+	.one {
+		position: fixed;
+		top: 30%;
+		left: 50%;
+		transform: translateZ(0);
+	}
+	
+	.two {
+		position: fixed;
+	}
+	
+	.three {
+		position: fixed;
+		left: 80%;
+		transform: translateZ(0);
+	}
+	
+	.four {
+		position: fixed;
+		top: 50%;
+		left: 75%;
+	}
+	
+	.five {
+		position: fixed;
+		left: 55%;
+		transform: translateZ(0);
+	}
+	
+	.six {
+		position: fixed;
+		top: 20%;
+		left: 20%;
+		transform: translateZ(0);
+	}
+	
+	.seven {
+		position: fixed;
+		top: 57%;
+		left: 17%;
+		transform: translateZ(0);
+	}
+	
+	.eight {
+		position: fixed;
+		left: 10%;
+		top: 37%;
+		transform: translateZ(0);
+	}
+	
+	.smuart {
+		height: 90px;
+		position: fixed;
+		top: 73%;
+		left: 32%;
+	}
+	
+    .button-text {
+        font-size: 30px !important;
+    }
+
+    /* 4. FIX THE FOOTER */
+    footer {
+        position: fixed; /* Keeps footer stuck to the bottom of the screen while you scroll */
+        width: 100vw;
+        left: 0;
+        z-index: 99;
+    }
+	
+	.foot-text {
+		font-size: 15px;
+		margin-left: 0;
+	}
+}	
+
+</style>
+<body>
+<img src="https://i.postimg.cc/SRSFsT2p/smuartproj.png" class="smuart">
+
+<a href="Meet The Team.html">
+	<button class="hero-button one">
+		<img src="https://i.postimg.cc/pdz32Y6z/meettheteam.jpg" alt="team">
+		<p class="p5 button-text">1</p>
+	</button>
+</a>
+
+<a href="Introduction.html">
+	<button class="hero-button two">
+		<img src="https://i.postimg.cc/Ghp0kD49/introduction.jpg" alt="intro">
+		<p class="p5 button-text">2</p>
+	</button>
+</a>
+
+<a href="The Problem.html">
+	<button class="hero-button three">
+		<img src="https://i.postimg.cc/90W6gR1t/problem.jpg" alt="prob">
+		<p class="p5 button-text">3</p>
+	</button>
+</a>
+
+<a href="Review of Related Literature.html">
+	<button class="hero-button four">
+		<img src="https://i.postimg.cc/cHDhZvd0/rrl.jpg" alt="rrl">
+		<p class="p5 button-text">4</p>
+	</button>
+</a>
+
+<a href="Proposed Solution.html">
+	<button class="hero-button five">
+		<img src="https://i.postimg.cc/sXzq1GFs/oursolutions.jpg" alt="oursols">
+		<p class="p5 button-text">5</p>
+	</button>
+</a>
+
+<a href="Solutions Impact.html">
+	<button class="hero-button six">
+		<img src="https://i.postimg.cc/vTqNPP4s/solutionsimpact.jpg" alt="solsimp">
+		<p class="p5 button-text">6</p>
+	</button>
+</a>
+
+<a href="Team Growth and Learning.html">
+	<button class="hero-button seven">
+		<img src="https://i.postimg.cc/MKH4c8Lb/teamgrowth.jpg" alt="solsimp">
+		<p class="p5 button-text">7</p>
+	</button>
+</a>
+
+<a href="Insights.html">
+	<button class="hero-button eight">
+		<img src="https://i.postimg.cc/5NtcwzXY/insights.jpg" alt="solsimp">
+		<p class="p5 button-text">8</p>
+	</button>
+</a>
+
+<footer>
+    <i class="foot-text" style="p6 margin-top: 0;"><b>Leading Innovations, Transforming Lives, Building The Nation.</b></i>
+    <p style="margin-bottom: 0;"> © 2026 SMUART | All Rights Reserved</p>
+</footer>
+ </head>
+</body>
+</html>

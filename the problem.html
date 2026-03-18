@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+	<link rel="icon" type="image/png" href="https://i.postimg.cc/26WVTxdf/image-2026-03-16-130449481-removebg-preview.png">
+    <title>The Problem</title>
+<style>
+    /* Reset basic margins and padding for consistency */
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: sans-serif; /* Fallback */
+        background-color: #f4f4f4;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Font Classes */
+    .p1 { font-family: "Papyrus", fantasy; }
+    .p2 { font-family: "Copperplate", fantasy; }
+    .p3 { font-family: "Garamond", serif; }
+    .p5 { font-family: "Brush Script MT", cursive; }
+
+    /* --- HEADER SECTION --- */
+    header {
+        background-color: #A08679;
+        width: 100%;
+        padding: 40px 20px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .back {
+        background-color: transparent;
+        color: white;
+        font-weight: bold;
+        border-radius: 20px;
+        transition: background-color 0.3s;
+        padding: 10px 10px;
+        position: absolute;
+        top: 8.5px;
+        left: 10px;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 15px;
+        z-index: 10;
+    }
+
+    .back:hover { 
+        background-color: black; 
+    }
+
+    .header-title {
+        color: white;
+        font-size: clamp(3rem, 8vw, 100px); /* Scales font size based on screen width */
+        letter-spacing: clamp(5px, 2vw, 20px);
+        margin: 0;
+        z-index: 5;
+    }
+
+    .curvleft {
+        width: 16vw; 
+        max-width: 250px;
+        position: absolute; 
+        top: 50px; 
+        left: -29px; 
+        z-index: 2;
+    }
+
+    .curvright {
+        width: 10vw; 
+        max-width: 150px;
+        position: absolute; 
+        top: 85px; 
+        right: 20px; 
+        z-index: 2;
+    }
+
+    /* --- MAIN CONTENT & BACKGROUND --- */
+    .main-content {
+        position: relative;
+        flex-grow: 1; /* Takes up remaining height */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 80px 20px;
+    }
+
+    /* Using a pseudo-element for the background allows us to control opacity without affecting the cards */
+    .main-content::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-image: url('https://i.postimg.cc/8kjHySrM/lunetaparkbg.jpg');
+        background-size: cover;
+        background-position: center;
+        opacity: 0.7;
+        z-index: -1;
+		
+    }
+
+    /* --- CARDS LAYOUT --- */
+    .cards-container {
+        display: flex;
+        flex-direction: row; /* Horizontal by default */
+        justify-content: center;
+        gap: 40px;
+        width: 100%;
+        max-width: 1400px;
+		position: relative;
+		top: 20px;
+    }
+
+    .card {
+        background-color: #6A4A3ACC;
+        border-radius: 20px;
+        box-shadow: 5px 5px #3D251E;
+        padding: 70px 30px 40px; /* Large top padding to make room for circle */
+        position: relative;
+        flex: 1; /* Makes all cards equal width */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+		
+    }
+
+    .circle {
+        width: 100px;
+        height: 100px;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: 5px -5px #3D251E;
+        position: absolute;
+        top: -50px; /* Pulls the circle halfway out of the top of the card */
+        left: 50%;
+        transform: translateX(-50%); /* Centers the circle horizontally */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .circle-number {
+        font-size: 70px;
+        color: black;
+        margin-top: 10px; /* Slight adjustment to center Brush Script visually */
+    }
+
+    .card-title {
+        color: #3D251E;
+        font-size: clamp(24px, 2vw, 32px);
+        line-height: 1.3;
+        text-shadow: 1px 1px 3px white;
+        margin-bottom: 20px;
+    }
+
+    .card-text {
+        color: white;
+        font-size: 19px;
+        line-height: 1.5;
+        text-shadow: 1px 1px 7px black;
+    }
+
+    /* --- MOBILE RESPONSIVENESS --- */
+    /* When the screen is 900px wide or smaller, apply these rules */
+    @media (max-width: 900px) {
+        .cards-container {
+            flex-direction: column; /* Stacks the cards vertically */
+            align-items: center;
+            gap: 80px; /* Increases gap to account for overlapping circles */
+        }
+
+        .card {
+            width: 90%; /* Cards take up 90% of screen width on mobile */
+            max-width: 500px;
+        }
+
+        .curvleft, .curvright {
+            display: none; /* Hides decorative elements on small screens to save space */
+        }
+        
+        .header-title {
+            margin-top: 30px; /* Makes room for the back button on mobile */
+			font-size: 40px;
+        }
+    }
+</style>
+</head>
+<body>
+
+    <header>
+        <a href="Homepage.html" class="back p1" style="color: white">BACK</a>
+        <img src="https://i.postimg.cc/PfcbLTjq/curvleft.png" class="curvleft" alt="decoration">
+        <h1 class="header-title p1"><b>THE PROBLEM</b></h1>
+        <img src="https://i.postimg.cc/Dw7RNqYs/curvright.png" class="curvright" alt="decoration">
+    </header>
+
+    <main class="main-content">
+        <div class="cards-container">
+            
+            <div class="card">
+                <div class="circle">
+                    <span class="circle-number p5">1</span>
+                </div>
+                <h2 class="card-title p2">WHY <br> THIS PROBLEM MATTERS</h2>
+                <b class="card-text p3">
+                    Current excavation systems still face challenges in ensuring consistent artifact protection and accurate recovery, especially in large or complex dig sites. The lack of automated detection and handling systems increases the possibility of artifact damage and reduces excavation efficiency. These challenges highlight the need for improved excavation support systems that can assist archaeologists in maintaining precision while preserving historical materials.
+                </b>
+            </div>
+
+            <div class="card">
+                <div class="circle">
+                    <span class="circle-number p5">2</span>
+                </div>
+                <h2 class="card-title p2">WHO <br> IS AFFECTED</h2>
+                <b class="card-text p3">
+                    This problem affects archaeologists, researchers, historians, and preservation specialists who rely on accurate artifact recovery for historical study. It also affects museums, educational institutions, and future researchers who depend on well-preserved artifacts and accurate excavation records. In addition, local communities and society are affected because damaged or lost artifacts can result in the loss of important cultural and historical knowledge.
+                </b>
+            </div>
+
+            <div class="card">
+                <div class="circle">
+                    <span class="circle-number p5">3</span>
+                </div>
+                <h2 class="card-title p2">WHAT <br> ARE THE CHALLENGES</h2>
+                <b class="card-text p3">
+                    Modern excavation suffers from a reliance on manual techniques and outdated technology, resulting in inefficient workflows and frequent operational errors. These traditional methods risk damaging delicate artifacts and complicate data analysis through inconsistent, non-automated documentation. Furthermore, the absence of innovation forces archaeologists to work in hazardous conditions, compromising both their personal safety and overall performance.
+                </b>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

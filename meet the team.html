@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+	<link rel="icon" type="image/png" href="https://i.postimg.cc/26WVTxdf/image-2026-03-16-130449481-removebg-preview.png">
+    <title>Meet The Team</title>
+<style>
+body.fade-out { opacity: 0; }
+
+body {
+    /* Replaced absolute centering trick with Flexbox */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    overflow: hidden; /* Prevents scrollbars when scaling */
+    background-image: linear-gradient(to top, rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url("https://i.postimg.cc/YjB2BRSL/bgnatoh.jpg"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+#responsive-stage {
+    /* Switched from absolute to relative, removed negative margins */
+    position: relative;
+    width: 1580px; 
+    height: 900px;
+    flex-shrink: 0; /* Prevents flexbox from forcing a resize before JS handles it */
+    transform-origin: center center;
+}
+
+.roundrec, .roundrec2 {
+    max-width: 985px;
+    width: 100%; 
+    max-height: 400px;
+    height: 100%;
+    background-color: rgb(255,255,255);
+    border-radius: 20px;
+    position: absolute; 
+    top: 200px;
+    left: 250px;
+    z-index: 0;
+}
+
+/* Animations */
+.animate-shrink-left { animation: shrinkLeftMove 1s forwards; }
+@keyframes shrinkLeftMove {
+  0-49% { transform: translateX(0px) scale(1); opacity: 1;}
+  50-99% { transform: translateX(-250px) scale(0.5); opacity: 0.5;}
+  100% { transform: translateX(-550px) scale(0.3); opacity: 0;}
+}
+
+.animate-grow-right { animation: growRightMove 1s forwards; }
+@keyframes growRightMove {
+  0% { transform: translateX(-550px) scale(0.3); opacity: 0;}
+  50-1% { transform: translateX(-250px) scale(0.5); opacity: 0.5;}
+  100-51% { transform: translateX(0px) scale(1); opacity: 1;}
+}
+
+.animate-shrink-right { animation: shrinkRightMove 1s forwards; }
+@keyframes shrinkRightMove {
+  0-49% { transform: translateX(0px) scale(1); opacity: 1;}
+  50-99% { transform: translateX(250px) scale(0.5); opacity: 0.5;}
+  100% { transform: translateX(550px) scale(0.3); opacity: 0;}
+}
+
+.animate-grow-left { animation: growLeftMove 1s forwards; }
+@keyframes growLeftMove {
+  0% { transform: translateX(550px) scale(0.3); opacity: 0;}
+  50-1% { transform: translateX(250px) scale(0.5); opacity: 0.5;}
+  100-51% { transform: translateX(0px) scale(1); opacity: 1;}
+}
+
+.sirpega, .scar { position: absolute; top: 50px; left: 560px; z-index: 2; }
+.rojo { position: absolute; top: 50px; left: 500px; z-index: 2; }
+.ron { position: absolute; top: 110px; left: 165px; z-index: 2; }
+.yuri { position: absolute; top: 100px; right: 245px; z-index: 2; }
+.leantham { position: absolute; top: 60px; left: 25px; z-index: 2; }
+.harriet { position: absolute; top: 90px; left: 230px; z-index: 2; }
+.rhyce { position: absolute; top: 100px; right: 320px; z-index: 2; }
+.seanklaire { position: absolute; top: 60px; left: 25px; z-index: 2; }
+
+.arrow-right {
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 30px solid white;
+    transition: border-bottom-color 0.3s, transform 0.3s;
+    position: absolute;
+    top: 380px;
+    left: 1300px;
+    z-index: 99;
+    outline: none;
+    cursor: pointer;
+}
+.arrow-right:focus:not(:focus-visible) { outline: none; }
+.arrow-right:hover {
+    transition: border-bottom-color 0.3s, transform 0.3s;
+    transform: scale(1.5);      
+}
+
+.arrow-left {
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 30px solid white;
+    transition: border-bottom-color 0.3s, transform 0.3s;
+    position: absolute;
+    top: 380px;
+    left: 165px;
+    z-index: 99;
+    cursor: pointer;
+}
+.arrow-left:hover {
+    transition: border-bottom-color 0.3s, transform 0.3s;
+    transform: scale(1.5);      
+}
+
+.back {
+  background-color: transparent; 
+  border-radius: 20px;
+  transition: background-color 0.3s, transform 0.3s;
+  padding: 10px 10px;
+  position: absolute;
+  top: 8.5px;
+  left: 10px;
+  z-index: 99;
+  outline: none;
+  cursor: pointer;
+}
+.back:hover { background-color: white; border-radius: 20px; }
+
+.p1 { font-family: "Papyrus", Papyrus, fantasy; }
+.p2 { font-family: "Copperplate", Copperplate, fantasy; }
+.p3 { font-family: "Garamond", Garamond, serif; }
+.p4 { font-family: "Verdana", Verdana, cursive; }
+
+#SirPega, #Scarlet, #Rojo, #RonYuri, #LeanTham, #SeanKlaire, #HarrietRhyce {
+    transition: opacity 0.5s;
+    position: relative;
+    z-index: 10;
+}
+
+@media (max-width: 100px) {
+    .back {
+        font-size: 24px;
+        padding: 15px 25px;
+        background-color: rgba(255, 255, 255, 0.5); /* Slight background so it stands out on mobile */
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<b class ="p1">
+    <a class="back" href="Homepage.html" style="font-size: 15px; color: black;"><b>BACK</b></a>
+</b>
+    
+<div id="responsive-stage">
+
+    <h1 class="p4" style="word-spacing: 10px; letter-spacing: 3px; color: white; font-size: 80px; text-align: center; position: absolute; width: 985px; top: 100px; left: 250px; text-shadow: 8px 2px 5px #714423; margin: 0;">MEET THE TEAM</h1>
+
+      <div id="SirPega">
+        <div class="sirpega">
+            <img src="https://i.postimg.cc/CxP5rW8Q/sirpega.png" alt="SirPega" width="auto" height="550px" style="filter: drop-shadow(20px -10px 20px #89CFF0FF);">
+        </div>
+
+        <b class ="p1" style ="position: absolute; left: 290px; top: 225px; font-size: 50px; z-index: 2;">Asst. Prof. Rodelito D. Pega</b>
+        <i class ="p2" style ="position: absolute; left: 283px; top: 300px; font-size: 57px; z-index: 2;">TEAM COACH</i>
+        <p class ="p3" style ="position: absolute; left: 290px; top: 380px; font-size: 30px; z-index: 2; text-align: justify; line-height: 1.45;">
+            Provides mentorship and guidance to the <br>
+            team, ensuring they stay aligned with FLL<br>
+            Core Values while fostering a student-<br>
+            led learning environment.
+        </p>
+        
+        <a href="#Scarlet" id="sirpega-arrow-right">
+            <div class="arrow-right"></div>
+        </a>
+    </div>
+
+    <div class="roundrec" style="box-shadow: 15px 15px 50px #714423FF"></div>
+
+    <div id="Scarlet" style="display: none; opacity: 0;">
+        <div class="scar">
+            <img src="https://i.postimg.cc/x1x8pWmy/scar.png" alt="Scarlet" width="auto" height="550px" style="filter: drop-shadow(20px -10px 20px #87AE73FF);">
+        </div>
+        
+        <b class ="p1" style ="position: absolute; left: 290px; top: 225px; font-size: 52px; z-index: 2;">Johannes Scarlet O. Oro</b>
+        <i class ="p2" style ="position: absolute; left: 283px; top: 300px; font-size: 55px; z-index: 2;">TEAM CAPTAIN</i>
+        <p class ="p3" style ="position: absolute; left: 290px; top: 365px; font-size: 37px; z-index: 2; text-align: justify; line-height: 1.5;">
+            Coordinates the team's workflow <br>
+            and ensures all project goals are <br>
+            met on time.
+        </p>
+        
+        <a href="#SirPega" id="scar-arrow-left">
+            <div class="arrow-left"></div>
+        </a>
+
+        <a href="#Rojo" id="scar-arrow-right">
+            <div class="arrow-right"></div>
+        </a>
+    </div>
+
+    <div id="Rojo" style="display: none; opacity: 0;">
+        <div class="rojo">
+            <img src="https://i.postimg.cc/zD6k6cCq/rojo.png" alt="Rojo" width="auto" height="550px" style="filter: drop-shadow(20px -10px 20px #FF0000FF);">
+        </div>
+        
+        <b class ="p1" style ="position: absolute; left: 290px; top: 225px; font-size: 50px; z-index: 2;">
+            Rodolfo Jose C. <br>
+            Evediente
+        </b>
+        <i class ="p2" style ="position: absolute; left: 287px; top: 380px; font-size: 50px; z-index: 2;">HEAD RESEARCHER</i>
+        <p class ="p3" style ="position: absolute; left: 290px; top: 440px; font-size: 35px; z-index: 2; text-align: justify; line-height: 1.5;">
+            Investigates the core problem and<br>
+            gathers expert data to back the solution.
+        </p>
+        
+        <a href="#Scarlet" id="rojo-arrow-left">
+            <div class="arrow-left"></div>
+        </a>
+
+        <a href="#RonYuri" id="rojo-arrow-right">
+            <div class="arrow-right"></div>
+        </a>
+    </div>
+
+    <div id="RonYuri" style="display: none; opacity: 0;">
+        <div class="ron">
+            <img src="https://i.postimg.cc/SR5RNPLK/ron.png" alt="Ron" width="auto" height="490px" style="filter: drop-shadow(-15px -10px 20px #9847B4FF);">
+        </div>
+        <div class="yuri">
+            <img src="https://i.postimg.cc/XYHq1T5h/yuri.png" alt="Yuri" width="auto" height="500px" style="filter: drop-shadow(20px -10px 20px #042E60FF);">
+        </div>
+        
+        <b class ="p1" style ="position: absolute; left: 538px; top: 217px; font-size: 45px; z-index: 2;">
+            Paul Yuri P. Caubalejo
+        </b>
+        <b class ="p1" style ="position: absolute; left: 550px; top: 283px; font-size: 43px; z-index: 2;">
+            Ron Ivan M. De Lunas
+        </b>
+        <i class ="p2" style ="position: absolute; left: 590px; top: 355px; font-size: 43px; z-index: 2;">CREATIVE DESIGNERS</i>
+        <p class ="p3" style ="position: absolute; left: 593px; top: 410px; font-size: 33px; z-index: 2; text-align: center; line-height: 1.5;">
+            Visualizes the project by <br>
+            building and <br> designing prototypes.
+        </p>
+        
+        <a href="#Rojo" id="ronyuri-arrow-left">
+            <div class="arrow-left"></div>
+        </a>
+
+        <a href="#LeanTham" id="ronyuri-arrow-right">
+            <div class="arrow-right"></div>
+        </a>
+    </div>
+
+    <div id="LeanTham" style="display: none; opacity: 0;">
+        <div class="leantham"><img src="https://i.postimg.cc/tRY5rjVh/leantham.png" alt="LeanTham" width="auto" height="540px" style="filter: drop-shadow(-20px -10px 20px #3B3126FF);">
+        </div>
+        
+        <b class ="p1" style ="position: absolute; right: 365px; top: 217px; font-size: 35px; z-index: 2;">
+            Therese Amalia L. Guevarra
+        </b>
+        <b class ="p1" style ="position: absolute; right: 365px; top: 277px; font-size: 35px; z-index: 2;">
+            Leandro A. Abellera Jr.
+        </b>
+        <i class ="p2" style ="position: absolute; right: 375px; top: 340px; font-size: 42px; z-index: 2;">MATERIAL MANAGERS</i>
+        <p class ="p3" style ="position: absolute; right: 365px; top: 390px; font-size: 28.5px; z-index: 2; text-align: right; line-height: 1.5;">
+            Keeps robot parts and <br> materials organized,
+            ready, and <br> easy to access during
+            training <br> and competition.
+        </p>
+        
+        <a href="#RonYuri" id="leantham-arrow-left">
+            <div class="arrow-left"></div>
+        </a>
+
+        <a href="#HarrietRhyce" id="leantham-arrow-right">
+            <div class="arrow-right"></div>
+        </a>
+    </div>
+
+    <div id="HarrietRhyce" style="display: none; opacity: 0;">
+        <div class="harriet">
+            <img src="https://i.postimg.cc/Wtcpc84H/harriet.png" alt="Harriet" width="auto" height="510px" style="filter: drop-shadow(-15px -10px 20px #FB7488FF);">
+        </div>
+        <div class="rhyce">
+            <img src="https://i.postimg.cc/NGSxSz6q/rhyce.png" alt="Rhyce" width="auto" height="500px" style="filter: drop-shadow(20px -10px 20px #499DD0FF);">
+        </div>
+        
+        <b class ="p1" style ="position: absolute; left: 510px; top: 217px; font-size: 40px; z-index: 2;">
+            Mary Harriet E. Pasumbal
+        </b>
+        <b class ="p1" style ="position: absolute; left: 565px; top: 283px; font-size: 40px; z-index: 2; text-align: center;">
+            Rhyce Matthew A. <br> Cabacis
+        </b>
+        <i class ="p2" style ="position: absolute; left: 600px; top: 415px; font-size: 43px; z-index: 2;">PROGRAMMERS</i>
+        <p class ="p3" style ="position: absolute; left: 460px; top: 470px; font-size: 30px; z-index: 2; text-align: center; line-height: 1.5;">
+            Develops the software and technical <br>
+            logic needed to make the innovation
+            functional.
+        </p>
+        
+        <a href="#LeanTham" id="harrietrhyce-arrow-left">
+            <div class="arrow-left"></div>
+        </a>
+
+        <a href="#SeanKlaire" id="harrietrhyce-arrow-right">
+            <div class="arrow-right"></div>
+        </a>
+    </div>
+
+    <div id="SeanKlaire" style="display: none; opacity: 0;">
+        <div class="seanklaire">
+            <img src="https://i.postimg.cc/rwnsZv4f/seanklaire.png" alt="SeanKlaire" width="auto" height="540px" style="filter: drop-shadow(-20px -10px 20px #FFC067FF);">
+        </div>
+        
+        <b class ="p1" style ="position: absolute; right: 365px; top: 217px; font-size: 43px; z-index: 2;">
+            Klaire Forlani J. Destreza
+        </b>
+        <b class ="p1" style ="position: absolute; right: 365px; top: 285px; font-size: 39px; z-index: 2;">
+            Sean Matthew H. Mailig
+        </b>
+        <i class ="p2" style ="position: absolute; right: 375px; top: 350px; font-size: 45px; z-index: 2;">COMMUNICATORS</i>
+        <p class ="p3" style ="position: absolute; right: 365px; top: 425px; font-size: 28.5px; z-index: 2; text-align: right; line-height: 1.5;">
+            Shares the team's findings with <br> the
+            public and leads the final <br> judging
+            presentation.
+        </p>
+        
+        <a href="#HarrietRhyce" id="seanklaire-arrow-left">
+            <div class="arrow-left"></div>
+        </a>
+    </div>
+
+    <div class="roundrec2" style="box-shadow: 15px 15px 50px #714423FF"></div>
+
+</div>
+
+<script>
+const box = document.querySelector('.roundrec');
+const box2 = document.querySelector('.roundrec2');
+const SirPegaArrowRight = document.getElementById('sirpega-arrow-right');
+const ScarArrowRight = document.getElementById('scar-arrow-right'); 
+const ScarArrowLeft = document.getElementById('scar-arrow-left'); 
+const RojoArrowRight = document.getElementById('rojo-arrow-right'); 
+const RojoArrowLeft = document.getElementById('rojo-arrow-left'); 
+const RonYuriArrowRight = document.getElementById('ronyuri-arrow-right'); 
+const RonYuriArrowLeft = document.getElementById('ronyuri-arrow-left'); 
+const LeanThamArrowRight = document.getElementById('leantham-arrow-right'); 
+const LeanThamArrowLeft = document.getElementById('leantham-arrow-left'); 
+const HarrietRhyceArrowRight = document.getElementById('harrietrhyce-arrow-right'); 
+const HarrietRhyceArrowLeft = document.getElementById('harrietrhyce-arrow-left'); 
+const SeanKlaireArrowLeft = document.getElementById('seanklaire-arrow-left'); 
+const sirPegaInfo = document.querySelector('#SirPega');
+const scarletInfo = document.querySelector('#Scarlet'); 
+const rojoInfo = document.querySelector('#Rojo');
+const ronyuriInfo = document.querySelector('#RonYuri'); 
+const leanthamInfo = document.querySelector('#LeanTham');
+const harrietrhyceInfo = document.querySelector('#HarrietRhyce');
+const seanklaireInfo = document.querySelector('#SeanKlaire');
+
+// --- RIGHT ARROW: SIR PEGA TO SCARLET ---
+SirPegaArrowRight.addEventListener('click', (e) => {
+  e.preventDefault(); 
+  setTimeout(() => {
+    box.classList.remove('animate-shrink-left', 'animate-grow-right'); 
+    void box.offsetWidth; 
+    box.classList.add('animate-shrink-left');
+ 
+    box2.classList.remove('animate-shrink-right', 'animate-grow-left'); 
+    void box2.offsetWidth; 
+    box2.classList.add('animate-grow-left');
+   }, 300);
+  sirPegaInfo.style.opacity = '0';
+  setTimeout(() => { sirPegaInfo.style.display = 'none'; }, 1000);
+  setTimeout(() => {
+    scarletInfo.style.display = 'block'; 
+    void scarletInfo.offsetWidth; 
+    scarletInfo.style.opacity = '1'; 
+  }, 1000); 
+});
+
+// --- LEFT ARROW: SCARLET TO SIR PEGA ---
+ScarArrowLeft.addEventListener('click', (e) => {
+  e.preventDefault(); 
+  setTimeout(() => {
+    box.classList.remove('animate-shrink-left', 'animate-grow-right'); 
+    void box.offsetWidth; 
+    box.classList.add('animate-grow-right');
+ 
+    box2.classList.remove('animate-shrink-right', 'animate-grow-left'); 
+    void box2.offsetWidth; 
+    box2.classList.add('animate-shrink-right');
+   }, 300);
+  scarletInfo.style.opacity = '0';
+  setTimeout(() => { scarletInfo.style.display = 'none'; }, 1000);
+  setTimeout(() => {
+    sirPegaInfo.style.display = 'block'; 
+    void sirPegaInfo.offsetWidth; 
+    sirPegaInfo.style.opacity = '1'; 
+  }, 1000); 
+});
+
+// --- RIGHT ARROW: SCARLET TO ROJO ---
+ScarArrowRight.addEventListener('click', (e) => {
+  e.preventDefault(); 
+  setTimeout(() => {
+    box.classList.remove('animate-shrink-left', 'animate-grow-right'); 
+    void box.offsetWidth; 
+    box.classList.add('animate-shrink-left');
+ 
+    box2.classList.remove('animate-shrink-right', 'animate-grow-left'); 
+    void box2.offsetWidth; 
+    box2.classList.add('animate-grow-left');
+   }, 300);
+  scarletInfo.style.opacity = '0';
+  setTimeout(() => { scarletInfo.style.display = 'none'; }, 1000);
+  setTimeout(() => {
+    rojoInfo.style.display = 'block'; 
+    void rojoInfo.offsetWidth; 
+    rojoInfo.style.opacity = '1'; 
+  }, 1000); 
+});
+
+// --- LEFT ARROW: ROJO TO SCARLET ---
+RojoArrowLeft.addEventListener('click', (e) => {
+  e.preventDefault(); 
+  setTimeout(() => {
+    box.classList.remove('animate-shrink-left', 'animate-grow-right'); 
+    void box.offsetWidth; 
+    box.classList.add('animate-grow-right');
+ 
+    box2.classList.remove('animate-shrink-right', 'animate-grow-left'); 
+    void box2.offsetWidth; 
+    box2.classList.add('animate-shrink-right');
+   }, 300);
+  rojoInfo.style.opacity = '0';
+  setTimeout(() => { rojoInfo.style.display = 'none'; }, 1000);
+  setTimeout(() => {
+    scarletInfo.style.display = 'block'; 
+    void scarletInfo.offsetWidth; 
+    scarletInfo.style.opacity = '1'; 
+  }, 1000); 
+});
+
+// --- RIGHT ARROW: ROJO TO RONYURI ---
+RojoArrowRight.addEventListener('click', (e) => {
+  e.preventDefault(); 
+  setTimeout(() => {
+    box.classList.remove('animate-shrink-left', 'animate-grow-right'); 
+    void box.offsetWidth; 
+    box.classList.add('animate-shrink-left');
+ 
+    box2.classList.remove('animate-shrink-right', 'animate-grow-left'); 
+    void box2.offsetWidth; 
+    box2.classList.add('animate-grow-left');
+   }, 300);
+  rojoInfo.style.opacity = '0';
+  setTimeout(() => { rojoInfo.style.display = 'none'; }, 1000);
+  setTimeout(() => {
+    ronyuriInfo.style.display = 'block'; 
+    void ronyuriInfo.offsetWidth; 
+    ronyuriInfo.style.opacity = '1'; 
+  }, 1000); 
+});
+
+// --- LEFT ARROW: RONYURI TO ROJO ---
+RonYuriArrowLeft.addEventListener('click', (e) => {
+  e.preventDefault(); 
+  setTimeout(() => {
+    box.classList.remove('animate-shrink-left', 'animate-grow-right'); 
+    void box.offsetWidth; 
+    box.classList.add('animate-grow-right');
+ 
+    box2.classList.remove('animate-shrink-right', 'animate-grow-left'); 
+    void box2.offsetWidth; 
+    box2.classList.add('animate-shrink-right');
+   }, 300);
+  ronyuriInfo.style.opacity = '0';
+  setTimeout(() => { ronyuriInfo.style.display = 'none'; }, 1000);
+  setTimeout(() => {
+    rojoInfo.style.display = 'block'; 
+    void rojoInfo.offsetWidth; 
+    rojoInfo.style.opacity = '1'; 
+  }, 1000); 
+});
+
+// --- RIGHT ARROW: RONYURI TO LEANTHAM ---
+RonYuriArrowRight.addEventListener('click', (e) => {
+  e.preventDefault(); 
+  setTimeout(() => {
+    box.classList.remove('animate-shrink-left', 'animate-grow-right'); 
+    void box.offsetWidth; 
+    box.classList.add('animate-shrink-left');
+ 
+    box2.classList.remove('animate-shrink-right', 'animate-grow-left'); 
+    void box2.offsetWidth; 
+    box2.classList.add('animate-grow-left');
+   }, 300);
+  ronyuriInfo.style.opacity = '0';
+  setTimeout(() => { ronyuriInfo.style.display = 'none'; }, 1000);
+  setTimeout(() => {
+    leanthamInfo.style.display = 'block'; 
+    void leanthamInfo.offsetWidth; 
+    leanthamInfo.style.opacity = '1'; 
+  }, 1000); 
+});
+
+// --- LEFT ARROW: LEANTHAM TO RONYURI ---
+LeanThamArrowLeft.addEventListener('click', (e) => {
+  e.preventDefault(); 
+  setTimeout(() => {
+    box.classList.remove('animate-shrink-left', 'animate-grow-right'); 
+    void box.offsetWidth; 
+    box.classList.add('animate-grow-right');
+ 
+    box2.classList.remove('animate-shrink-right', 'animate-grow-left'); 
+    void box2.offsetWidth; 
+    box2.classList.add('animate-shrink-right');
+   }, 300);
+  leanthamInfo.style.opacity = '0';
+  setTimeout(() => { leanthamInfo.style.display = 'none'; }, 1000);
+  setTimeout(() => {
+    ronyuriInfo.style.display = 'block'; 
+    void ronyuriInfo.offsetWidth; 
+    ronyuriInfo.style.opacity = '1'; 
+  }, 1000); 
+});
+
+// --- RIGHT ARROW: LEANTHAM TO HARRIETRHYCE ---
+LeanThamArrowRight.addEventListener('click', (e) => {
+  e.preventDefault(); 
+  setTimeout(() => {
+    box.classList.remove('animate-shrink-left', 'animate-grow-right'); 
+    void box.offsetWidth; 
+    box.classList.add('animate-shrink-left');
+ 
+    box2.classList.remove('animate-shrink-right', 'animate-grow-left'); 
+    void box2.offsetWidth; 
+    box2.classList.add('animate-grow-left');
+   }, 300);
+  leanthamInfo.style.opacity = '0';
+  setTimeout(() => { leanthamInfo.style.display = 'none'; }, 1000);
+  setTimeout(() => {
+    harrietrhyceInfo.style.display = 'block'; 
+    void harrietrhyceInfo.offsetWidth; 
+    harrietrhyceInfo.style.opacity = '1'; 
+  }, 1000); 
+});
+
+// --- LEFT ARROW: HARRIETRHYCE TO LEANTHAM ---
+HarrietRhyceArrowLeft.addEventListener('click', (e) => {
+  e.preventDefault(); 
+  setTimeout(() => {
+    box.classList.remove('animate-shrink-left', 'animate-grow-right'); 
+    void box.offsetWidth; 
+    box.classList.add('animate-grow-right');
+ 
+    box2.classList.remove('animate-shrink-right', 'animate-grow-left'); 
+    void box2.offsetWidth; 
+    box2.classList.add('animate-shrink-right');
+   }, 300);
+  harrietrhyceInfo.style.opacity = '0';
+  setTimeout(() => { harrietrhyceInfo.style.display = 'none'; }, 1000);
+  setTimeout(() => {
+    leanthamInfo.style.display = 'block'; 
+    void leanthamInfo.offsetWidth; 
+    leanthamInfo.style.opacity = '1'; 
+  }, 1000); 
+});
+
+// --- RIGHT ARROW: HARRIETRHYCE TO SEANKLAIRE ---
+HarrietRhyceArrowRight.addEventListener('click', (e) => {
+  e.preventDefault(); 
+  setTimeout(() => {
+    box.classList.remove('animate-shrink-left', 'animate-grow-right'); 
+    void box.offsetWidth; 
+    box.classList.add('animate-shrink-left');
+ 
+    box2.classList.remove('animate-shrink-right', 'animate-grow-left'); 
+    void box2.offsetWidth; 
+    box2.classList.add('animate-grow-left');
+   }, 300);
+  harrietrhyceInfo.style.opacity = '0';
+  setTimeout(() => { harrietrhyceInfo.style.display = 'none'; }, 1000);
+  setTimeout(() => {
+    seanklaireInfo.style.display = 'block'; 
+    void seanklaireInfo.offsetWidth; 
+    seanklaireInfo.style.opacity = '1'; 
+  }, 1000); 
+});
+
+// --- LEFT ARROW: SEANKLAIRE TO HARRIETRHYCE ---
+SeanKlaireArrowLeft.addEventListener('click', (e) => {
+  e.preventDefault(); 
+  setTimeout(() => {
+    box.classList.remove('animate-shrink-left', 'animate-grow-right'); 
+    void box.offsetWidth; 
+    box.classList.add('animate-grow-right');
+ 
+    box2.classList.remove('animate-shrink-right', 'animate-grow-left'); 
+    void box2.offsetWidth; 
+    box2.classList.add('animate-shrink-right');
+   }, 300);
+  seanklaireInfo.style.opacity = '0';
+  setTimeout(() => { seanklaireInfo.style.display = 'none'; }, 1000);
+  setTimeout(() => {
+    harrietrhyceInfo.style.display = 'block'; 
+    void harrietrhyceInfo.offsetWidth; 
+    harrietrhyceInfo.style.opacity = '1'; 
+  }, 1000); 
+});
+
+// --- SCALING LOGIC ---
+const stage = document.getElementById('responsive-stage');
+const baseWidth = 1580; 
+const baseHeight = 900; 
+
+function scaleTeamElements() {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+    
+    const scaleFactorX = screenWidth / baseWidth;
+    const scaleFactorY = screenHeight / baseHeight;
+    
+    // Using Math.min ensures it fits both height and width. 
+    // The * 0.95 gives it a tiny 5% buffer from the edges of the screen.
+    const scaleFactor = Math.min(scaleFactorX, scaleFactorY) * 0.95;
+
+    // Apply the scaling. We also added translateZ(0) to force hardware acceleration, which helps with blurry text on mobile!
+    stage.style.transform = `scale(${scaleFactor}) translateZ(0)`;
+}
+
+window.addEventListener('resize', scaleTeamElements);
+window.addEventListener('orientationchange', scaleTeamElements); // Ensure it adjusts when rotating a phone
+scaleTeamElements();
+
+</script>
+
+</body>
+</html>
