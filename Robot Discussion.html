@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title>Robot Discussion</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:sans-serif;
+background-color:#f4f4f4;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+/* HEADER */
+
+header{
+background-color:#A08679;
+width:100%;
+padding:40px 20px;
+position:relative;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+
+.back{
+position:absolute;
+left:15px;
+top:15px;
+text-decoration:none;
+color:white;
+font-weight:bold;
+}
+
+.header-title{
+color:white;
+font-size:clamp(2.5rem,7vw,70px);
+letter-spacing:clamp(5px,2vw,18px);
+}
+
+/* MAIN CONTENT */
+
+.main-content{
+position:relative;
+flex-grow:1;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:80px 20px;
+}
+
+/* BACKGROUND */
+
+.main-content::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background-image: linear-gradient(to top, rgba(255,255,255,0.3), rgba(255,255,255,0.3)), url("https://i.postimg.cc/HnXJBtg6/robot.jpg");
+background-size:cover;
+background-position:center;
+opacity:0.7;
+z-index:-1;
+}
+
+/* CARDS */
+
+.cards-container{
+display:flex;
+flex-direction:row;
+justify-content:center;
+gap:40px;
+width:100%;
+max-width:1400px;
+flex-wrap:wrap;
+}
+
+.card{
+background-color:#6A4A3ACC;
+border-radius:20px;
+box-shadow:5px 5px #3D251E;
+padding:70px 30px 40px;
+position:relative;
+flex:1;
+max-width:500px;
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+}
+
+/* NUMBER CIRCLE */
+
+.circle{
+width:100px;
+height:100px;
+background:white;
+border-radius:50%;
+box-shadow:5px -5px #3D251E;
+position:absolute;
+top:-50px;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.circle-number{
+font-size:60px;
+color:black;
+}
+
+/* TEXT */
+
+.card-title{
+color:#3D251E;
+font-size:clamp(24px,2vw,32px);
+line-height:1.3;
+text-shadow:1px 1px 3px white;
+margin-bottom:20px;
+letter-spacing: 2px;
+}
+
+.card-text{
+color:white;
+font-size:18px;
+line-height:1.5;
+text-shadow:1px 1px 7px black;
+}
+
+/* MOBILE */
+
+@media (max-width:900px){
+
+.cards-container{
+flex-direction:column;
+align-items:center;
+gap:80px;
+}
+
+.card{
+width:90%;
+max-width:500px;
+}
+
+}
+
+.p1 { font-family: "Papyrus", Papyrus, fantasy; }
+.p2 { font-family: "Copperplate", Copperplate, fantasy; }
+.p3 { font-family: "Garamond", Garamond, serif; }
+.p4 { font-family: "Verdana", Verdana, cursive; }
+.p5 { font-family: "Brush Script MT", Brush, cursive; }
+.p6 { font-family: "Times New Roman", Times, serif; }
+.p7 { font-family: "Lucida Handwriting", Lucida, cursive; }
+
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="Proposed Solution.html" class="back">BACK</a>
+<h1 class="p1 header-title">ROBOT DISCUSSION</h1>
+</header>
+
+<main class="main-content">
+
+<div class="cards-container">
+
+<div class="card">
+<div class="circle">
+<span class="circle-number">1</span>
+</div>
+
+<h2 class="p2 card-title">ROBOT PURPOSE</h2>
+
+<p class="p6 card-text">
+The SMUART robot is designed to assist archaeologists in excavation sites by helping locate, sort, and store potential artifacts safely. Archaeological digs require careful handling because artifacts are fragile and may be buried under layers of soil. The robot helps reduce the risk of accidental damage during excavation while also improving efficiency. By integrating detection sensors, mobility systems, and sorting mechanisms, the robot supports archaeologists in identifying areas that may contain artifacts and helps transport objects to designated storage containers.
+</p>
+
+</div>
+
+<div class="card">
+<div class="circle">
+<span class="circle-number">2</span>
+</div>
+
+<h2 class="p2 card-title">MOVEMENT AND NAVIGATION</h2>
+
+<p class="p6 card-text">
+The robot is designed to move carefully across excavation terrain while maintaining stability. Its wheels allow it to navigate the dig site while minimizing soil disturbance that could damage buried artifacts. Sensors assist the robot in detecting potential objects beneath the soil surface. When the robot detects a possible artifact, it slows down or adjusts its movement to prevent sudden actions that could damage the object. This controlled navigation system allows the robot to assist excavation teams without interfering with delicate archaeological layers.
+</p>
+
+</div>
+
+<div class="card">
+<div class="circle">
+<span class="circle-number">3</span>
+</div>
+
+<h2 class="p2 card-title">ARTIFACT HANDLING SYSTEM</h2>
+
+<p class="p6 card-text">
+One of the robot's most important features is its artifact handling system. After a potential artifact is identified, the robot helps guide the object into a sorting and storage system. The conveyor mechanism transfers artifacts gently from the excavation area toward a protected storage container. The system is designed to move slowly and steadily to reduce the chance of objects falling or being damaged during transport. By organizing artifacts immediately after detection, the robot helps maintain proper documentation and prevents items from being misplaced at the excavation site.
+</p>
+
+</div>
+
+<div class="card">
+<div class="circle">
+<span class="circle-number">4</span>
+</div>
+
+<h2 class="p2 card-title">DOCUMENTATION AND OBSERVATION</h2>
+
+<p class="p6 card-text">
+The robot includes an integrated camera system that records excavation activity and documents artifacts as they are discovered. This allows archaeologists to review footage later and analyze excavation steps more carefully. Documentation is an important part of archaeological work because the position and context of artifacts provide valuable historical information. By capturing images and videos during excavation, the robot supports accurate documentation and helps researchers preserve important data about the site.
+</p>
+
+</div>
+
+</div>
+
+</main>
+
+</body>
+</html>

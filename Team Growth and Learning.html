@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="https://i.postimg.cc/26WVTxdf/image-2026-03-16-130449481-removebg-preview.png">
+    <title>Team Growth and Learning</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: sans-serif;
+            background-image: linear-gradient(to top, rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url("https://i.postimg.cc/pVpZ0HnZ/phil3.jpg"); 
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            padding-bottom: 50px; 
+        }
+
+        /* --- BACK BUTTON --- */
+        .back {
+            background-color: transparent;
+            color: black;
+            font-weight: bold;
+            border-radius: 20px;
+            transition: background-color 0.3s;
+            padding: 10px 10px;
+            position: absolute;
+            top: 8.5px;
+            left: 10px;
+            z-index: 999;
+            cursor: pointer;
+            font-size: 15px; 
+            text-decoration: none;
+        }
+        .back:hover { 
+            background-color: #A08679; 
+        }
+
+        /* --- MAIN CONTENT CONTAINER --- */
+        .content-wrapper {
+            width: 89.5%; 
+            margin: 80px auto 0 auto; 
+            background-color: rgb(255,255,255);
+            border-radius: 20px;
+            box-shadow: 0px 10px 50px black;
+            overflow: hidden; /* Keeps the banner tight to the rounded corners */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .title-pic {
+            width: 100%;
+            aspect-ratio: 18/9;
+            object-fit: cover;
+            display: block;
+        }
+
+        .title-bg {
+            background-color: #754341;
+            padding: 1.5vw 2vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .title-text {
+            font-size: clamp(30px, 3.5vw, 60px); 
+            letter-spacing: 1px;
+            word-spacing: 10px;
+            color: white;
+            margin: 0;
+            white-space: nowrap; 
+        }
+
+        /* --- CONTENT BODY --- */
+        .content-body {
+            padding: 4vw 5vw 6vw 5vw; 
+            display: flex;
+            flex-direction: column;
+            gap: 6vw; 
+        }
+
+        /* --- INTRO SECTION --- */
+        .intro-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3vw;
+        }
+
+        .intro-titles {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: clamp(40px, 4.5vw, 80px); 
+            color: #754341;
+            flex-shrink: 0;
+            min-width: 25%;
+        }
+
+        .intro-divider {
+            width: 4px;
+            height: 15vw;
+            min-height: 150px;
+            background-color: #754341;
+            border-radius: 5px;
+            flex-shrink: 0;
+        }
+
+        .intro-desc {
+            font-size: clamp(16px, 1.8vw, 30px); 
+            line-height: 1.4;
+            color: #754341;
+            margin: 0;
+            flex: 1;
+        }
+
+        /* --- SPLIT SECTIONS (Handles the alternating layout) --- */
+        .split-section {
+            display: flex;
+            align-items: center;
+            gap: 4vw;
+        }
+
+        .text-content {
+            flex: 1; 
+        }
+
+        .content-title {
+            font-size: clamp(30px, 3.5vw, 60px); 
+            line-height: 1.25;
+            color: #754341;
+            margin-top: -10vw;
+            margin-bottom: 1.5vw;
+        }
+
+        .text-content1 {
+            font-size: clamp(16px, 1.7vw, 29.6px); 
+            line-height: 1.4;
+            color: #754341;
+            margin-top: 13vw;
+            margin-bottom: 1.5vw;
+        }
+		
+		.text-content2 {
+            font-size: clamp(16px, 1.7vw, 29.6px); 
+            line-height: 1.4;
+            color: #754341;
+            margin-top: -9vw;
+            margin-bottom: 1.5vw; 
+			max-width 1000%;
+			width: 101%;
+
+        }
+
+        /* --- GALLERIES --- */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5vw;
+            width: 100%;
+            flex: 0 0 55%; 
+        }
+
+        img.gallery {
+            width: 100%;  
+            aspect-ratio: 1; 
+            object-fit: cover; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+
+        /* Fonts */
+        .p1 { font-family: "Papyrus", fantasy; }
+        .p3 { font-family: "Garamond", serif; }
+        .p4 { font-family: "Verdana", cursive; }
+        .p6 { font-family: "Times New Roman", serif; }
+
+        /* =========================================
+           MOBILE RESPONSIVENESS 
+           ========================================= */
+        @media (max-width: 1024px) {
+            .content-wrapper { width: 95%; margin-top: 60px; }
+            .title-bg { padding: 15px 20px; }
+            .title-text { white-space: normal; text-align: center; font-size: 35px; }
+            
+            .intro-section { flex-direction: column; text-align: center; gap: 20px; }
+            .intro-divider { width: 60%; height: 4px; min-height: 4px; }
+            
+            /* Stacks everything vertically on small screens */
+            .split-section { flex-direction: column; }
+            .content-title { text-align: center; font-size: 40px; }
+            .gallery-container { flex: 1; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="Homepage.html" class="back p1"><b>BACK</b></a>
+
+    <div class="content-wrapper">
+        
+        <div class="hero-section">
+            <img src="https://i.postimg.cc/0yCrQ3HX/team12.jpg" class="title-pic" alt="Team Header">
+            <div class="title-bg">
+                <h1 class="p1 title-text">TEAM GROWTH AND LEARNING</h1>
+            </div>
+        </div>
+
+        <div class="content-body">
+            
+            <div class="intro-section">
+                <div class="intro-titles">
+                    <b class="p6">Technical</b>
+                    <i class="p6"><b>Lessons</b></i>
+                </div>
+                <div class="intro-divider"></div>
+                <p class="p3 intro-desc">
+                    Through this project, the team gained hands-on experience in building and programming a robot for excavation and artifact handling. We learned how to integrate LEGO SPIKE sensors effectively, design mechanisms for controlled movement, and implement coding logic for sensor-guided decision-making. These technical skills allowed us to test and improve our robot’s accuracy, stability, and functionality during excavation simulations.
+                </p>
+            </div>
+
+            <div class="split-section">
+                <div class="gallery-container">
+                    <img src="https://i.postimg.cc/65NHhnmX/team4.jpg" class="gallery" alt="team4">
+                    <img src="https://i.postimg.cc/rFLh9xPc/team6.jpg" class="gallery" alt="team6">
+                    <img src="https://i.postimg.cc/RFVwV1GK/team9.jpg" class="gallery" alt="team7">
+                    <img src="https://i.postimg.cc/65NHhnmN/team5.jpg" class="gallery" alt="team5">
+                </div>
+                
+                <div class="text-content1">
+                    <h2 class="p4 content-title">Teamwork and <br>Collaboration</h2>
+                    <p class="p3">
+                        This project emphasized the importance of working effectively as a team to achieve a complex goal. Each member brought unique skills, ideas, and perspectives that were essential for problem-solving, decision-making, and refining our design. By collaborating, we were able to tackle challenges more efficiently than we could individually, combining technical skills in robotics, programming, and design with creative thinking and research insights.
+                    </p>
+                    <p class="p3">
+                        To keep work structured and development consistent, we learnt how to assign assignments based on each team member's strengths.
+                    </p>
+                </div>
+            </div>
+ 
+                <div class="text-content2">
+                    <p class="p3">
+                        During the development and testing stages, we had to exchange updates, talk about problems, and offer helpful criti-<br>cism, thus effective communication was essential. By helping one another through obstacles like mechanical malfunc-<br>tions or inconsistent sensors, the crew was able to stay positive and keep the project going. 
+                    </p>
+                    <p class="p3">
+                        Collaboration was also vital for integrating the different components of SMUART, from the robot’s excavation mecha-<br>nisms to the sorting and storage systems. By working together closely, we were able to refine our design, troubleshoot problems, and complete the project efficiently and successfully. Overall, this experience reinforced the value of team-<br>work in STEM projects and demonstrated that combining diverse skills and perspectives leads to stronger, more innovative solutions.
+                    </p>
+                    <p class="p3">
+                        Participating in this project helped each team member develop confidence, patience, and persistence. We learned to manage time effectively, adapt to unexpected challenges, and appreciate the value of careful planning and documenta-<br>tion. Overall, the project fostered personal growth in both technical and interpersonal skills, preparing us for future STEM challenges.
+                    </p>
+                </div>
+
+        </div> 
+    </div>
+</body>
+</html>

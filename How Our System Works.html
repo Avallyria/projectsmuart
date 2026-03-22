@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title>How Our System Works</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:sans-serif;
+background-color:#f4f4f4;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+/* HEADER */
+
+header{
+background-color:#A08679;
+width:100%;
+padding:40px 20px;
+position:relative;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+
+.back{
+position:absolute;
+left:15px;
+top:15px;
+text-decoration:none;
+color:white;
+font-weight:bold;
+}
+
+.header-title{
+color:white;
+font-size:clamp(2.5rem,7vw,55px);
+letter-spacing:clamp(5px,2vw,18px);
+}
+
+/* MAIN CONTENT */
+
+.main-content{
+position:relative;
+flex-grow:1;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:80px 20px;
+}
+
+/* BACKGROUND */
+
+.main-content::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background-image: linear-gradient(to top, rgba(255,255,255,0.3), rgba(255,255,255,0.3)), url("https://i.postimg.cc/ZKDkwzwB/robot2.jpg");
+background-size:cover;
+background-position:center;
+opacity:0.7;
+z-index:-1;
+}
+
+/* CARDS */
+
+.cards-container{
+display:flex;
+flex-direction:row;
+justify-content:center;
+gap:40px;
+width:100%;
+max-width:1400px;
+flex-wrap:wrap;
+}
+
+.card{
+background-color:#6A4A3ACC;
+border-radius:20px;
+box-shadow:5px 5px #3D251E;
+padding:70px 30px 40px;
+position:relative;
+flex:1;
+max-width:500px;
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+}
+
+/* NUMBER CIRCLE */
+
+.circle{
+width:100px;
+height:100px;
+background:white;
+border-radius:50%;
+box-shadow:5px -5px #3D251E;
+position:absolute;
+top:-50px;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.circle-number{
+font-size:60px;
+color:black;
+}
+
+/* TEXT */
+
+.card-title{
+color:#3D251E;
+font-size:clamp(24px,2vw,25px);
+line-height:1.3;
+text-shadow:1px 1px 3px white;
+margin-bottom:20px;
+}
+
+.card-text{
+color:white;
+font-size:18px;
+line-height:1.5;
+text-shadow:1px 1px 7px black;
+}
+
+/* MOBILE */
+
+@media (max-width:900px){
+
+.cards-container{
+flex-direction:column;
+align-items:center;
+gap:80px;
+}
+
+.card{
+width:90%;
+max-width:500px;
+}
+
+}
+
+.p1 { font-family: "Papyrus", Papyrus, fantasy; }
+.p2 { font-family: "Copperplate", Copperplate, fantasy; }
+.p3 { font-family: "Garamond", Garamond, serif; }
+.p4 { font-family: "Verdana", Verdana, cursive; }
+.p5 { font-family: "Brush Script MT", Brush, cursive; }
+.p6 { font-family: "Times New Roman", Times, serif; }
+.p7 { font-family: "Lucida Handwriting", Lucida, cursive; }
+
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="Proposed Solution.html" class="back">BACK</a>
+<h1 class="p1 header-title">HOW OUR SYSTEM WORKS</h1>
+</header>
+
+<main class="main-content">
+
+<div class="cards-container">
+
+<div class="card">
+
+<div class="circle">
+<span class="p5 circle-number">1</span>
+</div>
+
+<h2 class="p4 card-title">AUTOMATED EXCAVATION</h2>
+
+<p class="p3 card-text">
+SMUART replaces purely manual excavation methods with an automated system supported by robotics and sensors. The controlled excavation approach integrates layered soil removal with real-time sensor monitoring to reduce risk during artifact discovery. By adjusting movement based on detected underground conditions, the system improves precision and limits accidental damage. This automated environmental awareness enhances excavation safety and operational accuracy in complex terrain.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="circle">
+<span class="p5 circle-number">2</span>
+</div>
+
+<h2 class="p4 card-title">SAFE STORAGE SYSTEM</h2>
+
+<p class="p3 card-text">
+The robot sorts artifacts based on strength and fragility, enabling internal classification without heavy manual intervention. It separates delicate items from sturdier ones for better organization and reduced handling errors, then securely stores them in an integrated storage system to protect recovered materials from damage. This integration of automated sorting and protected storage enhances efficiency while minimizing human handling and preserving artifact integrity.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="circle">
+<span class="p5 circle-number">3</span>
+</div>
+
+<h2 class="p4 card-title">SMART CONVEYOR SORTING</h2>
+
+<p class="p3 card-text">
+After recovery, the robot sorts artifacts by fragility and material to prevent damage. They are then sent to a secondary conveyor for manual sorting by color, size, and type. This two-step process efficiently combines automated and manual classification, ensuring careful and organized artifact management.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="circle">
+<span class="p5 circle-number">4</span>
+</div>
+
+<h2 class="p4 card-title">DOCUMENTATION</h2>
+
+<p class="p3 card-text">
+The USB webcam with Raspberry Pi provides visual detection and navigation, identifying artifacts and recording coordinates for accurate mapping and obstacle awareness. It enables safe movement, live video feed, recording, and remote documentation. This creates a structured digital record that improves traceability, analysis, and long-term research access.
+</p>
+
+</div>
+
+</div>
+
+</main>
+
+</body>
+</html>

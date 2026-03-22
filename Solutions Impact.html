@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="icon" type="image/png" href="https://i.postimg.cc/26WVTxdf/image-2026-03-16-130449481-removebg-preview.png">
+    <title>Solutions Impact</title>
+    <style>
+        :root {
+            --img-width: 420px;
+            --img-height: 250px;
+            --gap: 30px;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; 
+            overscroll-behavior: none; 
+            font-family: sans-serif;
+            background-image: linear-gradient(to top, rgba(255,255,255,0.6), rgba(255,255,255,0.6)), url("https://i.postimg.cc/HnrPqBdh/solbg.jpg"); 
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .app-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- TITLE CONTAINER --- */
+        .title-wrapper {
+            position: absolute;
+            top: 3vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            z-index: 10;
+        }
+
+        .page-title {
+            font-size: clamp(40px, 6vw, 80px);
+            color: black;
+            margin: 0;
+        }
+        
+        .page-title2 {
+            font-size: clamp(50px, 8vw, 113px);
+            color: #5b3e31;
+			position: relative;
+            top: -1vh;
+            margin: 0;
+        }
+
+        /* --- MASTER CAROUSEL BLOCK --- */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            /* Removed the desktop margin-top so PC stays exactly where it was! */
+        }
+
+        .image-row {
+            position: absolute; 
+            top: 30px;
+            left: 0; 
+            display: flex;
+            gap: var(--gap);
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform; 
+        }
+
+        .image-card {
+            width: var(--img-width);
+            height: var(--img-height);
+            flex-shrink: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            opacity: 0.2;
+            transform: scale(0.85);
+            filter: grayscale(100%) brightness(0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-card.active {
+            opacity: 1;
+            transform: scale(1.15);
+            filter: grayscale(0%) brightness(1);
+        }
+        
+        /* --- TEXT AREA WRAPPER --- */
+        .text-area {
+            position: absolute;
+            top: 320px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 35px;
+            z-index: 5;
+        }
+
+        .caption-container {
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .caption-text {
+            font-size: clamp(20px, 4vw, 35px);
+            color: white;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateY(10px);
+            margin: 0;
+            background-color: #6A4A3A99;
+            border-radius: 20px;
+            padding: 5px 8px;
+        }
+
+        .caption-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .subcaption-container {
+            text-align: center;
+            width: 100%;
+            max-width: 1150px;
+        }
+
+        .subcaption-text {
+            font-size: clamp(14px, 2vw, 24px);
+            color: black;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateY(10px);
+            margin: 0;
+        }
+
+        .subcaption-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- NAVIGATION BUTTONS --- */
+        .nav-btn {
+            position: absolute;
+            top: 155px; /* Locked perfectly to the center of the desktop images */
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.4);
+            border: none;
+            color: black;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            z-index: 100;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #765341;
+            color: white;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0;
+            cursor: default;
+        }
+
+        .btn-left { left: 8vw; }
+        .btn-right { right: 8vw; }
+        
+        .back-btn {
+            background-color: transparent; 
+            transition: background-color 0.3s, transform 0.3s;
+            border-radius: 20px;
+            padding: 10px 10px;
+            position: absolute;
+            top: 8.5px;
+            left: 10px;
+            z-index: 99;
+            cursor: pointer;
+            font-size: 15px;
+            border: none;
+        }
+        
+        .back-btn:hover { 
+            background-color: white;
+        }
+        
+        /* Fonts */
+        .p1 { font-family: "Papyrus", fantasy; }
+        .p3 { font-family: "Garamond", serif; }
+        .p4 { font-family: "Verdana", cursive; }
+        .p6 { font-family: "Times New Roman", serif; }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            :root {
+                --img-width: 65vw;  
+                --img-height: 45vw; 
+                --gap: 15px;
+            }
+			
+
+            .title-wrapper {
+                flex-direction: column;
+                gap: 0px;
+                top: 8vh;
+            }
+
+            .carousel-container {
+                height: 500px; 
+                margin-top: 120px; /* <--- THIS ONLY AFFECTS MOBILE: Pushes everything down to clear the title */
+            }
+
+            .nav-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+                top: calc(30px + 22.5vw); /* Centers automatically on mobile images */
+            }
+            
+            .text-area {
+                top: calc(45vw + 50px); 
+                gap: 15px; 
+            }
+			
+			.caption-text {
+				font-size: 15.7px;
+			}
+			
+			.subcaption-text {
+				width: 95%;
+				position: absolute;
+				top: 87%;
+				left: 2.5%;
+				line-height: 1.25;
+				font-size: 15px;
+			}
+            
+            .btn-left { left: 2vw; }
+            .btn-right { right: 2vw; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+
+    <a href="Homepage.html" class="back-btn p1" style="color: black"><b>BACK</b></a>
+
+    <div class="title-wrapper">
+        <h1 class="p1 page-title">SOLUTIONS</h1>
+        <h1 class="p4 page-title2"><i>IMPACT</i></h1>
+    </div>
+
+    <div class="carousel-container">
+        
+        <button class="nav-btn btn-left" id="prevBtn" disabled>&#10094;</button>
+        <button class="nav-btn btn-right" id="nextBtn">&#10095;</button>
+        
+        <div class="image-row" id="row">
+            <div class="image-card active">
+                <img src="https://i.postimg.cc/kGpS6yrF/community.jpg" alt="1">
+            </div>
+            <div class="image-card">
+                <img src="https://i.postimg.cc/nrz7hPWc/environment.jpg" alt="2">
+            </div>
+            <div class="image-card">
+                <img src="https://i.postimg.cc/KY2MMzVX/safety.jpg" alt="3">
+            </div>
+            <div class="image-card">
+                <img src="https://i.postimg.cc/TYKg8Bmc/long-term.jpg" alt="4">
+            </div>
+            <div class="image-card">
+                <img src="https://i.postimg.cc/jj4JQT0Y/scalability.jpg" alt="5">
+            </div>
+        </div>
+        
+        <div class="text-area">
+            <div class="caption-container">
+                <p id="caption" class="caption-text p6"></p>
+            </div>
+            
+            <div class="subcaption-container">
+                <p id="subcaption" class="subcaption-text p3"></p>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+    <script>
+        const descriptions = [
+            "TO THE PEOPLE OR COMMUNITY",
+            "TO THE ENVIRONMENT",
+            "IMPACT ON SAFETY/EFFICIENCY",
+            "LONG-TERM BENEFIT",
+            "SCALABILITY"
+        ];
+        
+        const subdescriptions = [
+            "Discovering ancient history in inconspicuous places prove to be beneficial for communities " +
+            "as it can promote tourism, helping with the economy in " +
+            "the area. Rare artifacts can also be sold for large amounts " +
+            "of cash. In addition to this, people will tire themselves "+
+            "less because they won't be exhausting themselves by " +
+            "digging 24/7.  Instead, they can work on other productive " +
+            "tasks that don't require endless labor.",
+            
+            "By digging up artifacts with careful precision, we can ensure " +
+            "that our solution manages to capture history without damaging " +
+            "the environment beyond repair. Archaeology will inevitably damage " +
+            "the environment in some way, so that's why our solution is optimized " +
+            "to minimize any form of destruction. Besides keeping the environment " +
+            "safe, digging up artifacts also reduces the amount of artificial " +
+            "material buried underground, reducing the disturbance to local wildlife.",
+            
+            "Our solution is engineered to work as efficiently as possible, thanks to " +
+            "countless weeks of testing. This allows workers to focus on safer tasks "+
+            "while our robot does all the hard work, reducing the risk of casualties " +
+            "when digging. Because this is a robot, it will work as hard as it can and " +
+            "will only stop when it has run out of fuel, which can takes hours if not days " +
+            "of usage. With all of these factors, humans can remain safe, energized, and " +
+            "happy, while our solution does the work that would otherwise jeopardize human welfare.",
+            
+            "         In the long-term, our solution is able to adapt to changes in its environment. "+
+            "Besides that, because of how flexible the overall build is, rising trends in the world "+
+            "of technology will prove to be a non-issue as upgrading our robot won't be too challenging." +
+            "In the span of multiple decades, years of history will have been uncovered, educating people "+
+            "about the past and perhaps even inspiring others. Other benefits that our civilizations can " +
+            "earn from our solution include a healthier environment, better knowledge of infrastructure, "+
+            "and a balanced econony.",
+            
+            "Our solution can be used in other places aside from unassuming terrain. With tank-like " +
+            "wheels built with the design, our robot can maneuver around most kinds of terrain with " +
+            "relative ease. In addition, a gyro sensor is also present, ensuring that the robot is " +
+            "balanced. Just like how it's optimized to work as efficiently as possible, it is also " +
+            "refined to be able to work well in any kind of terrain."
+        ];
+
+        let index = 0;
+        const row = document.getElementById('row');
+        const cards = document.querySelectorAll('.image-card');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const caption = document.getElementById('caption');
+        const subcaption = document.getElementById('subcaption');
+
+        function update() {
+            row.style.transform = `translateX(calc(50vw - (var(--img-width) / 2) - ${index} * (var(--img-width) + var(--gap))))`;
+            
+            caption.classList.remove('visible');
+            subcaption.classList.remove('visible');
+            
+            setTimeout(() => {
+                caption.innerText = descriptions[index]
+                subcaption.innerText= subdescriptions[index];
+                caption.classList.add('visible');
+                subcaption.classList.add('visible');
+            }, 500);
+            
+            cards.forEach((card, i) => card.classList.toggle('active', i === index));
+            prevBtn.disabled = (index === 0);
+            nextBtn.disabled = (index === cards.length - 1);
+        }
+        
+        window.addEventListener('load', update);
+
+        nextBtn.addEventListener('click', () => { if (index < cards.length - 1) { index++; update(); } });
+        prevBtn.addEventListener('click', () => { if (index > 0) { index--; update(); } });
+    </script>
+</body>
+</html>

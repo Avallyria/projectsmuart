@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<title>Design Process</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:sans-serif;
+background-color:#f4f4f4;
+min-height:100vh;
+display:flex;
+flex-direction:column;
+}
+
+/* HEADER */
+
+header{
+background-color:#A08679;
+width:100%;
+padding:40px 20px;
+position:relative;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+
+.back{
+position:absolute;
+left:15px;
+top:15px;
+text-decoration:none;
+color:white;
+font-weight:bold;
+}
+
+.header-title{
+color:white;
+font-size:clamp(2.5rem,7vw,90px);
+letter-spacing:clamp(5px,2vw,18px);
+}
+
+/* MAIN CONTENT */
+
+.main-content{
+position:relative;
+flex-grow:1;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:80px 20px;
+}
+
+/* BACKGROUND */
+
+.main-content::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background-image: linear-gradient(to top, rgba(255,255,255,0.3), rgba(255,255,255,0.3)), url("https://i.postimg.cc/d3L61pGJ/robot3.jpg");
+background-size:cover;
+background-position:center;
+opacity:0.7;
+z-index:-1;
+}
+
+/* CARDS */
+
+.cards-container{
+display:flex;
+flex-direction:row;
+justify-content:center;
+gap:40px;
+width:100%;
+max-width:1400px;
+flex-wrap:wrap;
+}
+
+.card{
+background-color:#6A4A3ACC;
+border-radius:20px;
+box-shadow:5px 5px #3D251E;
+padding:70px 30px 40px;
+position:relative;
+flex:1;
+max-width:500px;
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+}
+
+/* NUMBER CIRCLE */
+
+.circle{
+width:100px;
+height:100px;
+background:white;
+border-radius:50%;
+box-shadow:5px -5px #3D251E;
+position:absolute;
+top:-50px;
+left:50%;
+transform:translateX(-50%);
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.circle-number{
+font-size:60px;
+color:black;
+}
+
+/* TEXT */
+
+.card-title{
+color:#3D251E;
+font-size:clamp(24px,2vw,32px);
+line-height:1.3;
+text-shadow:1px 1px 3px white;
+margin-bottom:20px;
+}
+
+.card-text{
+color:white;
+font-size:18px;
+line-height:1.5;
+text-shadow:1px 1px 7px black;
+}
+
+.arrowmage {
+	height: 180px;
+	position: absolute;
+	top: -12%;
+	left: 55%;
+	z-index: 99;
+}
+
+/* MOBILE */
+
+@media (max-width:900px){
+
+.cards-container{
+flex-direction:column;
+align-items:center;
+gap:80px;
+}
+
+.card{
+width:90%;
+max-width:500px;
+}
+
+.arrowmage {
+	top: 98%;
+	height: 20%;
+	transform: rotate(90deg);
+}
+
+}
+
+.p1 { font-family: "Papyrus", Papyrus, fantasy; }
+.p2 { font-family: "Copperplate", Copperplate, fantasy; }
+.p3 { font-family: "Garamond", Garamond, serif; }
+.p4 { font-family: "Verdana", Verdana, cursive; }
+.p5 { font-family: "Brush Script MT", Brush, cursive; }
+.p6 { font-family: "Times New Roman", Times, serif; }
+.p7 { font-family: "Lucida Handwriting", Lucida, cursive; }
+
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="Proposed Solution.html" class="back">BACK</a>
+<h1 class="p1 header-title">DESIGN PROCESS</h1>
+</header>
+
+<main class="main-content">
+
+<div class="cards-container">
+
+<div class="card">
+
+<img src="https://i.postimg.cc/DZ1BhJ2w/arrow.png" class="arrowmage">
+
+<div class="circle">
+<span class="p5 circle-number">1</span>
+</div>
+
+<h2 class="p6 card-title">FIRST PROTOTYPES AND IDEAS</h2>
+
+<p class="p3 card-text">
+The initial prototype was originally inspired by a spider-like structure, which influenced the robot’s early design and movement concept. The idea behind this design was to create a robot with multiple support points for stability while navigating uneven excavation terrain. However, during development, the team encountered difficulties integrating mechanisms into the leg structures. The spider-inspired design also resulted in a body that was too small to accommodate all required attachments, including sensors, mechanisms, and structural supports. Because of the limited internal space, components were difficult to organize and secure properly. Due to these limitations, the team decided to redesign the robot structure to better support the system’s excavation, sorting, and storage functions while allowing enough space for all necessary components.
+</p>
+
+</div>
+
+<div class="card">
+
+<img src="https://i.postimg.cc/DZ1BhJ2w/arrow.png" class="arrowmage">
+<div class="circle">
+<span class="p5 circle-number">2</span>
+</div>
+
+<h2 class="p6 card-title">PROBLEMS ENCOUNTERED</h2>
+
+<p class="p3 card-text">
+During development, the team encountered challenges related to safe artifact handling and mechanical stability. A key issue was ensuring the robot could place artifacts into storage without dropping or damaging them. Because some artifacts are fragile, controlling movement speed and grip required multiple adjustments in both design and programming. Another challenge involved securing the conveyor system onto its wheels. Early versions experienced alignment and stability issues that disrupted smooth artifact transfer and occasionally caused inconsistent movement during operation. Reinforcements were added to the conveyor structure, and wheel mounting was adjusted to improve alignment and balance.
+</p>
+
+</div>
+
+<div class="card">
+
+<img src="https://i.postimg.cc/DZ1BhJ2w/arrow.png" class="arrowmage">
+<div class="circle">
+<span class="p5 circle-number">3</span>
+</div>
+
+<h2 class="p6 card-title">ITERATION AND IMPROVEMENTS</h2>
+
+<p class="p3 card-text">
+The system was tested through multiple trial runs using simulated excavation environments. Testing focused on detection accuracy, movement stability, sorting consistency, and safe object handling. Each test allowed the team to observe system performance, identify errors, and make adjustments. Continuous testing and redesign improved the robot’s movement accuracy, structural stability, and reliability of sensor readings. Adjustments to the conveyor system, storage placement mechanism, and sensor positioning helped ensure smoother artifact transfer and safer placement into storage.
+</p>
+
+</div>
+
+<div class="card">
+
+<div class="circle">
+<span class="p5 circle-number">4</span>
+</div>
+
+<h2 class="p6 card-title">FINAL VERSION OF THE SOLUTION</h2>
+
+<p class="p3 card-text">
+The final SMUART design integrates excavation support, artifact detection, sorting assistance, documentation, and organized storage into one coordinated workflow. The robot navigates the dig site while maintaining stability and precise movement using sensor-guided control. During excavation simulation, the robot detects possible artifacts and adjusts its movement to prevent unnecessary soil disturbance or accidental damage to objects. After detection, the robot supports artifact transfer toward the built-in sorting and storage system and documents excavation activities using an integrated camera system, improving efficiency, documentation accuracy, and artifact preservation.
+</p>
+
+</div>
+
+</div>
+
+</main>
+
+</body>
+</html>
